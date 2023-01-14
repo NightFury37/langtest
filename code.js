@@ -1,43 +1,66 @@
 const code = `
-func square(Integer num) -> Integer {
-    num * num
+func (of: Integer) -> Integer
+square(of: num) = num * num
+
+func (first: Integer, second: Integer) -> Integer
+sumOfSquares(first, second) = square(first) + square(second)
+
+
+proc (size: Integer) -> ok:(at: Address) or outOfMemory:
+alloc(size) = {
+    // ...  code ...
+    goto outOfMemory:
 }
 
-func sumOfSquares(Integer a, Integer b) -> Integer {
-    square(a) + square(b)
+proc (old: Address, newSize: Integer) -> ok:(at: Address) or outOfMemory:
+realloc(old: previousLocation, newSize) = {
+    // ...  code ...
+    goto outOfMemory:
+}
+
+proc (location: Address) -> ok: or err:(trace: Trace)
+dealloc(location) = {
+    // ...  code ...
+    goto ok:
 }
 
 
-proc alloc(Integer size) -> choice {
-                                case ok(Address address) 
-                                case outOfMemory
-                            }
+proc (path: String) -> created:(handle: FileHandle) or failed:
+createFile(path) = {
+    // ... code ...
+    goto failed:
+}
 
-proc realloc(Address previousLocation, Integer newSize) -> | ok(Address address)
-                                                           | outOfMemory
+proc (path: String) -> opened:(handle: FileHandle) or fileNotFound:
+openFile(path) = {
+    // ... code ...
+    goto fileNotFound:
+}
 
-proc dealloc(Address location) -> ok or err(Trace trace)
+proc (handle: FileHandle) -> Integer
+fileSize(handle) = {
+    // ... code ...
+    0
+}
+
+proc (handle: FileHandle, address: Address, length: Integer) -> ok: or endOfFile:(bytesRead: Integer) or err:(trace: Trace)
+readFile(handle, address, length) = {
+    // ... code ...
+    goto ok:
+}
 
 
-proc createFile(String path) -> created(FileHandle handle) or failed
-
-proc openFile(String path) -> opened(FileHandle handle) or fileNotFound
-
-proc fileSize(FileHandle handle) -> Integer
-
-proc readFile(FileHandle handle, Address address, Integer length) -> ok() or endOfFile(Integer bytesRead) or err(Trace trace)
-
-
-proc readUserNameFromFile(String filePath) -> ok(named String userName) or err(Trace trace) {
+proc (filePath: String) -> ok:(userName: String) or err:(trace: Trace)
+readUserNameFromFile(filePath) = {
     match openFile(filePath)
-    case fileNotFound => Error.FileNotFound(filePath)
-    case opened(FileHandle handle) => {
+    case fileNotFound: => goto err:(trace: createTrace("File not found at : " + filePath))
+    case opened:(handle) => {
         let fileSize = fileSize(handle);
-        let userName = makeString(fileSize);
-        match readFile(handle, userName.address, fileSize)
-        case err(Trace trace) => err(trace)
-        case endOfFile(Integer bytesRead) => resizeString(userName, bytesRead)
-        case ok => userName
+        let name = makeString(fileSize);
+        match readFile(handle, name.address, fileSize)
+        case err:(trace) => goto err:(trace)
+        case endOfFile:(bytesRead) => goto ok:(userName: resizeString(name, bytesRead))
+        case ok: => goto ok:(userName: name)
     }
 }
 `

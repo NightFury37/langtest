@@ -2,7 +2,7 @@ const syntax = {
     defaultToken: 'invalid',
     
     keywords: [
-        'proc', 'func', 'or', 'named', 'match', 'case', 'let', 'do'
+        'proc', 'func', 'or', 'named', 'match', 'case', 'let', 'goto'
     ],
     
     typeKeywords: [
@@ -26,6 +26,8 @@ const syntax = {
     tokenizer: {
         root: [
         // identifiers and keywords
+        [/[a-z_$][\w$]*:/, 'label'],
+        
         [/[a-z_$][\w$]*/, { cases: { '@typeKeywords': 'keyword',
                                         '@keywords': 'keyword',
                                         '@default': 'identifier' } }],
