@@ -12,7 +12,7 @@ require(['vs/editor/editor.main'], function () {
         rules: [
             { token: 'keyword', foreground: 'FFFF00' },
             { token: 'identifier', foreground: 'FFBBBB' },
-            { token: 'type.identifier', foreground: 'FFBBBB' },
+            { token: 'type.identifier', foreground: 'BBFFBB' },
             { token: 'label', foreground: '00FFFF' },
             { token: 'operator', foreground: 'FFFFFF' },
             { token: 'delimiter', foreground: 'FFFFFF' },
