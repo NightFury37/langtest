@@ -6,32 +6,32 @@ func (first: Integer, second: Integer) -> Integer
 sumOfSquares(first, second) = square(first) + square(second)
 
 
-proc (size: Integer) -> ok:(at: Address) or outOfMemory:
+proc (size: Integer) -> either ok:(at: Address) or outOfMemory:
 alloc(size) = {
     // ...  code ...
     goto outOfMemory:
 }
 
-proc (old: Address, newSize: Integer) -> ok:(at: Address) or outOfMemory:
+proc (old: Address, newSize: Integer) -> either ok:(at: Address) or outOfMemory:
 realloc(old: previousLocation, newSize) = {
     // ...  code ...
     goto outOfMemory:
 }
 
-proc (location: Address) -> ok: or err:(trace: Trace)
+proc (location: Address) -> either ok: or err:(trace: Trace)
 dealloc(location) = {
     // ...  code ...
     goto ok:
 }
 
 
-proc (path: String) -> created:(handle: FileHandle) or failed:
+proc (path: String) -> either created:(handle: FileHandle) or failed:
 createFile(path) = {
     // ... code ...
     goto failed:
 }
 
-proc (path: String) -> opened:(handle: FileHandle) or fileNotFound:
+proc (path: String) -> either opened:(handle: FileHandle) or fileNotFound:
 openFile(path) = {
     // ... code ...
     goto fileNotFound:
@@ -43,14 +43,14 @@ fileSize(handle) = {
     0
 }
 
-proc (handle: FileHandle, address: Address, length: Integer) -> ok: or endOfFile:(bytesRead: Integer) or err:(trace: Trace)
+proc (handle: FileHandle, address: Address, length: Integer) -> either ok: or endOfFile:(bytesRead: Integer) or err:(trace: Trace)
 readFile(handle, address, length) = {
     // ... code ...
     goto ok:
 }
 
 
-proc (filePath: String) -> ok:(userName: String) or err:(trace: Trace)
+proc (filePath: String) -> either ok:(userName: String) or err:(trace: Trace)
 readUserNameFromFile(filePath) = {
     match openFile(filePath)
     case fileNotFound: => goto err:(trace: createTrace("File not found at : " + filePath))
