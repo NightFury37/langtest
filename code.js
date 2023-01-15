@@ -7,8 +7,8 @@ sumOfSquares(first, second) = square(first) + square(second)
 
 func (index: Integer) -> Integer
 fibonacci(index: count, hidden secondLast: a = 0, hidden last: b = 1) {
-    match count < 2
-    case true: => count
+    match count < 1
+    case true: => a
     case false: => fibonacci(index: count - 1, secondLast: b, last: a + b)
 }
 
