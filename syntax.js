@@ -25,13 +25,20 @@ const syntax = {
     // The main tokenizer for our languages
     tokenizer: {
         root: [
+
+        // labels
+        [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label']],
+        [/[a-z_$][\w$]*:/, 'argument.label'],
+
         // identifiers and keywords
-        [/[a-z_$][\w$]*:/, 'label'],
+        [/[a-z_$][\w]*(?=\()/, { cases: { '@typeKeywords': 'type.identifier',
+                                        '@keywords': 'keyword',
+                                        '@default': 'function.identifier' } }],
         
-        [/[a-z_$][\w$]*/, { cases: { '@typeKeywords': 'keyword',
+        [/[a-z_$][\w$]*/, { cases: { '@typeKeywords': 'type.identifier',
                                         '@keywords': 'keyword',
                                         '@default': 'identifier' } }],
-        [/[A-Z][\w\$]*/, 'type.identifier' ],  // to show class names nicely
+        [/[A-Z][\w$]*/, 'type.identifier' ],  // to show class names nicely
     
         // whitespace
         { include: '@whitespace' },

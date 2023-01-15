@@ -31,20 +31,20 @@ createFile(path) = {
     goto failed:
 }
 
-proc (path: String) -> either opened:(handle: FileHandle) or fileNotFound:
+proc (path: String) -> either opened:(file: FileHandle) or fileNotFound:
 openFile(path) = {
     // ... code ...
     goto fileNotFound:
 }
 
-proc (handle: FileHandle) -> Integer
-fileSize(handle) = {
+proc (file: FileHandle) -> Integer
+size(file: handle) = {
     // ... code ...
     0
 }
 
-proc (handle: FileHandle, address: Address, length: Integer) -> either ok: or endOfFile:(bytesRead: Integer) or err:(trace: Trace)
-readFile(handle, address, length) = {
+proc (file: FileHandle, address: Address, length: Integer) -> either ok: or endOfFile:(bytesRead: Integer) or err:(trace: Trace)
+read(file: handle, address, length) = {
     // ... code ...
     goto ok:
 }
@@ -52,14 +52,14 @@ readFile(handle, address, length) = {
 
 proc (filePath: String) -> either ok:(userName: String) or err:(trace: Trace)
 readUserNameFromFile(filePath) = {
-    match openFile(filePath)
-    case fileNotFound: => goto err:(trace: createTrace("File not found at : " + filePath))
-    case opened:(handle) => {
-        let fileSize = fileSize(handle);
-        let name = makeString(fileSize);
-        match readFile(handle, name.address, fileSize)
+    match openFile(path: filePath)
+    case fileNotFound: => goto err:(trace: createTrace(message: "File not found at : " + filePath))
+    case opened:(file: handle) => {
+        let fileSize = size(file: handle);
+        let name = createString(length: fileSize);
+        match read(file: handle, address: name.address, length: fileSize)
         case err:(trace) => goto err:(trace)
-        case endOfFile:(bytesRead) => goto ok:(userName: resizeString(name, bytesRead))
+        case endOfFile:(bytesRead) => goto ok:(userName: resize(string: name, newLength: bytesRead))
         case ok: => goto ok:(userName: name)
     }
 }
