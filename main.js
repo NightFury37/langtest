@@ -11,11 +11,11 @@ require(['vs/editor/editor.main'], function () {
         inherit: true,
         rules: [
             { token: 'keyword', foreground: 'FFFF00' },
-            { token: 'identifier', foreground: 'FFF2CC' },
-            { token: 'type.identifier', foreground: '77FF77' },
-            { token: 'function.identifier', foreground: 'FFBBBB'},
-            { token: 'argument.label', foreground: 'CCCCCC' },
-            { token: 'label', foreground: '00FFFF' },
+            { token: 'identifier', foreground: '7DF9FF' },
+            { token: 'type.identifier', foreground: '96DED1' },
+            { token: 'function.identifier', foreground: 'CCCCFF'},
+            { token: 'argument.label', foreground: 'FFBF00' },
+            { token: 'label', foreground: 'E0B0FF' },
             { token: 'operator', foreground: 'FFFFFF' },
             { token: 'delimiter', foreground: 'FFFFFF' },
             { token: 'invalid', foreground: '00FF00' }

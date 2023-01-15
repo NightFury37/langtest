@@ -2,7 +2,7 @@ const syntax = {
     defaultToken: 'invalid',
     
     keywords: [
-        'proc', 'func', 'or', 'named', 'match', 'case', 'let', 'goto', 'either', 'private'
+        'proc', 'func', 'or', 'named', 'match', 'case', 'let', 'goto', 'either', 'private', 'import', 'export', 'package', 'module', 'interface'
     ],
     
     typeKeywords: [

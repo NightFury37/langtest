@@ -3,7 +3,7 @@ func (of: Integer) -> Integer
 square(of: num) = num * num
 
 func (first: Integer, second: Integer) -> Integer
-sumOfSquares(first, second) = square(first) + square(second)
+sumOfSquares(first, second) = square(of: first) + square(of: second)
 
 func (index: Integer) -> Integer
 fibonacci(index: count, private secondLast: a = 0, private last: b = 1) {
