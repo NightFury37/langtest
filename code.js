@@ -6,7 +6,7 @@ func (first: Integer, second: Integer) -> Integer
 sumOfSquares(first, second) = square(first) + square(second)
 
 func (index: Integer) -> Integer
-fibonacci(index: count, hidden secondLast: a = 0, hidden last: b = 1) {
+fibonacci(index: count, private secondLast: a = 0, private last: b = 1) {
     match count < 1
     case true: => a
     case false: => fibonacci(index: count - 1, secondLast: b, last: a + b)
