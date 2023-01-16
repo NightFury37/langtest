@@ -11,8 +11,8 @@ require(['vs/editor/editor.main'], function () {
         inherit: true,
         rules: [
             { token: 'keyword', foreground: 'FFFF00' },
-            { token: 'identifier', foreground: '7DF9FF' },
-            { token: 'type.identifier', foreground: '96DED1' },
+            { token: 'identifier', foreground: '00FFFF' },
+            { token: 'type.identifier', foreground: '40E0D0' },
             { token: 'function.identifier', foreground: 'CCCCFF'},
             { token: 'argument.label', foreground: 'FFBF00' },
             { token: 'label', foreground: 'E0B0FF' },
