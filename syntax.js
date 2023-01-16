@@ -26,6 +26,9 @@ const syntax = {
     tokenizer: {
         root: [
 
+        // function and procedure definitions
+        [/(func\s+|proc\s+)([a-z_][\w$]*)/, ['keyword', 'definition']],
+
         // labels
         [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label']],
         [/[a-z_$][\w$]*:/, 'argument.label'],
