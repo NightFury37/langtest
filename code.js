@@ -4,15 +4,15 @@ func square(Integer num) = num * num
 func sumOfSquares(Integer first, Integer second) = square(first) + square(second)
 
 func fibonacci(Integer count, Integer a = 0, Integer b = 1) {
-    match count < 1
-    case true: => return a
-    case false: => goto fibonacci(count = count - 1, a = b, b = a + b)
+    if count < 1
+    then return a
+    else goto fibonacci(count = count - 1, a = b, b = a + b)
 }
 
 func factorial(Integer number, Integer result = 1) {
-    match number < 2
-    case true: => return result
-    case false: => goto factorial(number = number - 1, result = result * number)
+    if number < 2
+    then return result
+    else goto factorial(number = number - 1, result = result * number)
 }
 
 func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
@@ -22,10 +22,10 @@ func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
 proc composeTest(String input) {
     let hFun = compose(foo, bar);
     let message = {
-        match hFun(input)
-        case true: => "Less than 5 characters"
-        case false: => "More than 4 characters"
-    }
+        if hFun(input)
+        then "Less than 5 characters"
+        else "More than 4 characters"
+    };
     return toUpperCase(message)
 
     where
@@ -37,6 +37,16 @@ proc composeTest(String input) {
     func bar(Integer i) {
         return i < 5
     }
+}
+
+func areaOfCircle(Float radius) {
+    return pi * radius.squared()
+
+    where
+
+    val pi = 3.1415926535897932384626
+
+    func Float.squared() = self * self
 }
 
 

@@ -2,7 +2,7 @@ const syntax = {
     defaultToken: 'invalid',
     
     keywords: [
-        'proc', 'func', 'or', 'named', 'match', 'case', 'let', 'where', 'return', 'goto', 'either', 'private', 'import', 'export', 'package', 'module', 'interface'
+        'proc', 'func', 'val', 'or', 'named', 'match', 'case', 'let', 'where', 'return', 'goto', 'either', 'private', 'import', 'export', 'package', 'module', 'interface', 'self', 'if', 'then', 'else'
     ],
     
     typeKeywords: [
@@ -27,7 +27,7 @@ const syntax = {
         root: [
 
         // function and procedure definitions
-        [/(func\s+|proc\s+)([a-z_][\w$]*)/, ['keyword', 'definition' ] ],
+        [/(func\s+|proc\s+|val\s+)([a-z_][\w$]*)/, ['keyword', 'definition' ] ],
 
         // labels
         [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label'] ],
