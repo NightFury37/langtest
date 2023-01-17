@@ -15,6 +15,10 @@ func factorial(Integer number, Integer result = 1) {
     case false: => goto factorial(number = number - 1, result = result * number)
 }
 
+func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
+    (A x) => g(f(x))
+}
+
 
 proc alloc(Integer size) -> either ok:(Address address) or outOfMemory:
 
@@ -35,12 +39,12 @@ proc read(FileHandle handle, Address address, Integer length) -> either ok: or e
 proc readUserNameFromFile(String filePath) {
     match openFile(path = filePath)
     case fileNotFound: => goto err:(trace = createTrace(message = "File not found at : " + filePath))
-    case opened:(file = handle) => {
+    case opened:(FileHandle handle) => {
         let fileSize = size(file = handle);
         let name = createString(length = fileSize);
         match read(file = handle, address = name.address, length = fileSize)
-        case err:(trace) => goto err:(trace)
-        case endOfFile:(bytesRead) => goto ok:(userName = resize(string = name, newLength = bytesRead))
+        case err:(Trace trace) => goto err:(trace)
+        case endOfFile:(Integer bytesRead) => goto ok:(userName = resize(string = name, newLength = bytesRead))
         case ok: => goto ok:(userName = name)
     }
 }

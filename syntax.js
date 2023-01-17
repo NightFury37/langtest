@@ -27,20 +27,20 @@ const syntax = {
         root: [
 
         // function and procedure definitions
-        [/(func\s+|proc\s+)([a-z_][\w$]*)/, ['keyword', 'definition']],
+        [/(func\s+|proc\s+)([a-z_][\w$]*)/, ['keyword', 'definition' ] ],
 
         // labels
-        [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label']],
+        [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label'] ],
         [/[a-z_$][\w$]*:/, 'argument.label'],
 
         // identifiers and keywords
-        [/[a-z_$][\w]*(?=\()/, { cases: { '@typeKeywords': 'type.identifier',
+        [/[a-z_$][\w$]*(?=\()/, { cases: { '@typeKeywords': 'type.identifier',
                                         '@keywords': 'keyword',
-                                        '@default': 'function.identifier' } }],
+                                        '@default': 'function.identifier' } } ],
         
         [/[a-z_$][\w$]*/, { cases: { '@typeKeywords': 'type.identifier',
                                         '@keywords': 'keyword',
-                                        '@default': 'identifier' } }],
+                                        '@default': 'identifier' } } ],
         [/[A-Z][\w$]*/, 'type.identifier' ],  // to show class names nicely
     
         // whitespace
