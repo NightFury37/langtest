@@ -1,25 +1,29 @@
 const code = `
-func square(Integer num) = num * num
+func square(Integer num) -> Integer {
+    return num * num
+}
 
-func sumOfSquares(Integer first, Integer second) = square(first) + square(second)
+func sumOfSquares(Integer first, Integer second) -> Integer {
+    return square(first) + square(second)
+}
 
-func fibonacci(Integer count, Integer a = 0, Integer b = 1) {
+func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer {
     if count < 1
     then return a
-    else goto fibonacci(count = count - 1, a = b, b = a + b)
+    else goto fibonacci(count <- count - 1, a <- b, b <- a + b)
 }
 
-func factorial(Integer number, Integer result = 1) {
+func factorial(Integer number, Integer soFar = 1) -> Integer {
     if number < 2
-    then return result
-    else goto factorial(number = number - 1, result = result * number)
+    then return soFar
+    else goto factorial(number <- number - 1, soFar <- soFar * number)
 }
 
-func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
+func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C {
     return (A x) => g(f(x))
 }
 
-proc composeTest(String input) {
+proc composeTest(String input) -> String {
     let hFun = compose(foo, bar);
     let message = {
         if hFun(input)
@@ -30,23 +34,27 @@ proc composeTest(String input) {
 
     where
 
-    func foo(String s) {
+    func foo(String s) -> Integer {
         return length(s)
     }
 
-    func bar(Integer i) {
+    func bar(Integer i) -> either true: or false: {
         return i < 5
     }
 }
 
-func areaOfCircle(Float radius) {
-    return pi * radius.squared()
+func areaOfCircle(Float radius) -> Float {
+    return pi * radius.raisedTo(2)
 
     where
 
     val pi = 3.1415926535897932384626
 
-    func Float.squared() = self * self
+    func Float.raisedTo(Integer power, Float soFar = 1.0) -> Float {
+        if power == 0
+        then return soFar
+        else goto this.raisedTo(power <- power - 1, soFar <- soFar * this)
+    }
 }
 
 
@@ -66,16 +74,16 @@ proc size(FileHandle handle) -> Integer
 proc read(FileHandle handle, Address address, Integer length) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)
 
 
-proc readUserNameFromFile(String filePath) {
-    match openFile(path = filePath)
-    case fileNotFound: => goto err:(trace = createTrace(message = "File not found at : " + filePath))
+proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace) {
+    match openFile(path <- filePath)
+    case fileNotFound: => goto err:(trace <- createTrace(message <- "File not found at : " + filePath))
     case opened:(FileHandle handle) => {
-        let fileSize = size(file = handle);
-        let name = createString(length = fileSize);
-        match read(file = handle, address = name.address, length = fileSize)
-        case err:(Trace trace) => goto err:(trace)
-        case endOfFile:(Integer bytesRead) => goto ok:(userName = resize(string = name, newLength = bytesRead))
-        case ok: => goto ok:(userName = name)
+        let fileSize = size(file <- handle);
+        let name = createString(length <- fileSize);
+        match read(handle <- handle, address <- name.address, length <- fileSize)
+        case err:(Trace trace) => goto err:(trace <- trace)
+        case endOfFile:(Integer bytesRead) => goto ok:(userName <- resize(string <- name, newLength <- bytesRead))
+        case ok: => goto ok:(userName <- name)
     }
 }
 `
