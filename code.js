@@ -4,27 +4,27 @@ func square(Integer num) -> Integer {
 }
 
 func sumOfSquares(Integer first, Integer second) -> Integer {
-    return square(first) + square(second)
-}
-
-func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer {
-    if count < 1
-    then return a
-    else goto fibonacci(count <- count - 1, a <- b, b <- a + b)
+    return square(num = first) + square(num = second)
 }
 
 func factorial(Integer number, Integer soFar = 1) -> Integer {
     if number < 2
     then return soFar
-    else goto factorial(number <- number - 1, soFar <- soFar * number)
+    else goto factorial(number--, soFar *= number)
+}
+
+func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer {
+    if count < 1
+    then return a
+    else goto fibonacci(count--, a = b, b += a)
 }
 
 func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C {
-    return (A x) => g(f(x))
+    return x => g(f(x))
 }
 
 proc composeTest(String input) -> String {
-    let hFun = compose(foo, bar);
+    let hFun = compose(f = foo, g = bar);
     let message = {
         if hFun(input)
         then "Less than 5 characters"
@@ -53,7 +53,7 @@ func areaOfCircle(Float radius) -> Float {
     func Float.raisedTo(Integer power, Float soFar = 1.0) -> Float {
         if power == 0
         then return soFar
-        else goto this.raisedTo(power <- power - 1, soFar <- soFar * this)
+        else goto this.raisedTo(power--, soFar *= this)
     }
 }
 
@@ -75,15 +75,15 @@ proc read(FileHandle handle, Address address, Integer length) -> either ok: or e
 
 
 proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace) {
-    match openFile(path <- filePath)
-    case fileNotFound: => goto err:(trace <- createTrace(message <- "File not found at : " + filePath))
+    match openFile(path = filePath)
+    case fileNotFound: => goto err:(trace = createTrace(message = "File not found at : " + filePath))
     case opened:(FileHandle handle) => {
-        let fileSize = size(file <- handle);
-        let name = createString(length <- fileSize);
-        match read(handle <- handle, address <- name.address, length <- fileSize)
-        case err:(Trace trace) => goto err:(trace <- trace)
-        case endOfFile:(Integer bytesRead) => goto ok:(userName <- resize(string <- name, newLength <- bytesRead))
-        case ok: => goto ok:(userName <- name)
+        let fileSize = size(handle);
+        let name = createString(length = fileSize);
+        match read(handle, address = name.address, length = fileSize)
+        case err:(Trace trace) => goto err:(trace)
+        case endOfFile:(Integer bytesRead) => goto ok:(userName = resize(string = name, newLength = bytesRead))
+        case ok: => goto ok:(userName = name)
     }
 }
 `
