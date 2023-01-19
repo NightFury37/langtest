@@ -1,4 +1,23 @@
 const code = `
+module libraryname.packagename1.packagename2.FileName;
+
+from libraryname.packagename1.packagename2.ModuleName1;
+import functionName1 as name1;
+import functionName2 as name2;
+import procedureName3 as name3;
+import TypeName4 as Name4;
+
+from libraryname.packagename3.ModuleName2;
+import TypeName5 as Name5;
+import procedureName6 as name6;
+import CONSTANT_NAME_7 as NAME_7;
+
+from externallibraryname1.packagename4.ModuleName3;
+import functionName8 as name8;
+import functionName9 as name9;
+
+export sumOfSquares, factorial, fibonacci, compose, readUserNameFromFile;
+
 func square(Integer num) -> Integer {
     return num * num
 }
