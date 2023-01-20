@@ -1,22 +1,20 @@
 const code = `
 module libraryname.packagename1.packagename2.FileName;
 
-from libraryname.packagename1.packagename2.ModuleName1;
-import functionName1 as name1;
-import functionName2 as name2;
-import procedureName3 as name3;
-import TypeName4 as Name4;
+import libraryname.packagename1.packagename2.ModuleName1 {
+    rename functionName1 as name1;
+    rename functionName2 as name2;
+    rename procedureName3 as name3;
+    rename TypeName4 as Name4;
+};
+import libraryname.packagename3.ModuleName2;
+import externallibraryname1.packagename4.ModuleName3;
 
-from libraryname.packagename3.ModuleName2;
-import TypeName5 as Name5;
-import procedureName6 as name6;
-import CONSTANT_NAME_7 as NAME_7;
-
-from externallibraryname1.packagename4.ModuleName3;
-import functionName8 as name8;
-import functionName9 as name9;
-
-export sumOfSquares, factorial, fibonacci, compose, readUserNameFromFile;
+export func sumOfSquares(Integer first, Integer second) -> Integer;
+export func factorial(Integer number) -> Integer;
+export func fibonacci(Integer count) -> Integer;
+export func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C;
+export func readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace);
 
 func square(Integer num) -> Integer {
     return num * num

@@ -7,7 +7,7 @@ const syntax = {
         'let', 'where', 'return', 'goto',
         'if', 'then', 'else', 'elif',
         'from', 'as', 'import', 'export',
-        'package', 'module', 'interface'
+        'rename', 'module', 'interface'
     ],
     
     typeKeywords: [
