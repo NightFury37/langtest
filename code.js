@@ -10,12 +10,6 @@ import libraryname.packagename1.packagename2.ModuleName1 {
 import libraryname.packagename3.ModuleName2;
 import externallibraryname1.packagename4.ModuleName3;
 
-export func sumOfSquares(Integer first, Integer second) -> Integer;
-export func factorial(Integer number) -> Integer;
-export func fibonacci(Integer count) -> Integer;
-export func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C;
-export func readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace);
-
 func square(Integer num) -> Integer {
     return num * num
 }
