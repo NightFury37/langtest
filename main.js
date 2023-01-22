@@ -25,6 +25,7 @@ require(['vs/editor/editor.main'], function () {
     var editor = monaco.editor.create(document.getElementById('container'), {
         theme: 'myCustomTheme',
         value: code,
-        language: 'myCustomLanguage'
+        language: 'myCustomLanguage',
+        automaticLayout: true
     });
 });
