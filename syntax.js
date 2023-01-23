@@ -6,8 +6,8 @@ const syntax = {
         'either', 'or', 'match', 'case',
         'let', 'where', 'return', 'goto',
         'if', 'then', 'else', 'elif',
-        'from', 'as', 'import', 'export',
-        'rename', 'module', 'interface'
+        'import', 'as', 'use',
+        'module', 'interface'
     ],
     
     typeKeywords: [

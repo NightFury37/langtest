@@ -2,10 +2,10 @@ const code = `
 module libraryname.packagename1.packagename2.FileName;
 
 import libraryname.packagename1.packagename2.ModuleName1 {
-    rename functionName1 as name1;
-    rename functionName2 as name2;
-    rename procedureName3 as name3;
-    rename TypeName4 as Name4;
+    use functionName1 as name1;
+    use functionName2 as name2;
+    use procedureName3 as name3;
+    use TypeName4 as Name4;
 };
 import libraryname.packagename3.ModuleName2;
 import externallibraryname1.packagename4.ModuleName3;
