@@ -1,0 +1,159 @@
+.sidebar {
+    background-color: #272727;
+    width: 365px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonPanel {
+    display: flex;
+    height: 50px;
+    padding: 5px;
+    text-align: center;
+}
+
+.accPanel {
+    display: flex;
+    height: 31px;
+    text-align: center;
+}
+
+button.main {
+    background-color: darkgray;
+    border: 2px solid #272727;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+button.main:hover {
+    background-color: gold;
+}
+
+button.pay {
+    background-color: #44b92d;
+    border: 5px solid #272727;
+    border-radius: 10px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+button.pay:hover {
+    background-color: gold;
+}
+
+button.acc {
+    background-color: darkgray;
+    border: none;
+    padding: 1px 3px 1px 3px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+button.acc:hover {
+    background-color: gold;
+}
+
+.buttonImage {
+    float: left;;
+    padding-left: 10px;
+}
+
+.buttonText {
+    float: left;
+    font-size: large;
+    line-height: 31px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.accButtonImage {
+    float: left;
+}
+
+.accButtonText {
+    float: left;
+    font-size: large;
+    line-height: 26px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.balance {
+    flex-grow: 1;
+    color: gold;
+    padding-top: 5px;
+    font-size: large;
+}
+
+.filePanel {
+    color: lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex-grow: 1;
+}
+
+.fileIcon {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.menuBar {
+    background-color: #444444;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.menu {
+    display: inline-block;
+}
+
+.menuButton {
+    color: lightgray;
+    background-color: #444444;
+    border: none;
+    padding: 5px;
+    margin: 1px 0px 1px 0px;
+}
+
+.menuButton:hover {
+    background-color: #555555;
+}
+
+.dropdownContent {
+    position: absolute;
+    display: none;
+    background-color: #272727;
+    width: 250px;
+    z-index: 1;
+}
+
+.menu:hover .menuButton {
+    background-color: #555555;
+}
+
+.menu:hover .dropdownContent {
+    display: block;
+}
+
+.menuItemGroup {
+    border: 1px solid #444444;
+    border-radius: 0;
+}
+
+.menuItem {
+    color: lightgray;
+    background-color: #272727;
+    text-align: left;
+    text-decoration: none;
+    width: 246px;
+    border: none;
+    padding: 5px 7px 5px 27px;
+    margin: 1px 2px 1px 2px;
+}
+
+.menuItem:hover {
+    color: white;
+    background-color: #367c28;
+}

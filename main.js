@@ -29,3 +29,51 @@ require(['vs/editor/editor.main'], function () {
         automaticLayout: true
     });
 });
+
+function enterFullscreen() {
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+        document.getElementById("fsB").onclick = exitFullScreen;
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+        document.getElementById("fsB").onclick = exitFullScreen;
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+        document.getElementById("fsB").onclick = exitFullScreen;
+    }
+}
+
+function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+        document.getElementById("fsB").onclick = enterFullscreen;
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+        document.getElementById("fsB").onclick = enterFullscreen;
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+        document.getElementById("fsB").onclick = enterFullscreen;
+    }
+}
+
+function toggleFullscreen() {
+    if (document.fullscreenElement != null) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    } else {
+        var elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
+    }
+}
