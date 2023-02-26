@@ -1,9 +1,142 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.menuBar {
+    background-color: #444444;
+    padding: 2px 5px 0px 5px;
+    display: flex;
+}
+
+.menu {
+    display: inline-block;
+}
+
+.menuButton {
+    color: lightgray;
+    background-color: #444444;
+    border: none;
+    padding: 5px;
+    margin: 1px 0px 1px 0px;
+}
+
+.menuButton:hover {
+    background-color: #555555;
+}
+
+.dropdownContent {
+    position: absolute;
+    display: none;
+    background-color: #272727;
+    width: 250px;
+    z-index: 1;
+}
+
+.menu:hover .menuButton {
+    background-color: #555555;
+}
+
+.menu:hover .dropdownContent {
+    display: block;
+}
+
+.menuItemGroup {
+    border: 1px solid #444444;
+    border-radius: 0;
+}
+
+.menuItem {
+    color: lightgray;
+    background-color: #272727;
+    text-align: left;
+    text-decoration: none;
+    width: 246px;
+    border: none;
+    padding: 5px 7px 5px 27px;
+    margin: 1px 2px 1px 2px;
+}
+
+.menuItem:hover {
+    color: white;
+    background-color: #367c28;
+}
+
+.sep {
+    flex: 1;
+}
+
+.tabArea {
+    position: relative;
+}
+
+button.tab {
+    color: lightgray;
+    padding: 6px 24px 5px 16px;
+    margin: 1px 1px 0px 1px;
+    border: none;
+    background-color: #505050;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+}
+
+button.ctab {
+    color: lightgray;
+    padding: 6px 24px 5px 16px;
+    margin: 1px 1px 0px 1px;
+    border: none;
+    background-color: #272727;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+button.lTab {
+    display: none;
+    position: absolute;
+    background: url(icons/close-gray.png) no-repeat center;
+    border: none;
+    right: 4px;
+    top: 5px;
+    padding: 9px 9px;
+    cursor: pointer;
+}
+
+.tabArea:hover button.lTab {
+    display: block;
+}
+
+button.lTab:hover {
+    background-color: #272727;
+}
+
+button.clTab {
+    position: absolute;
+    background: url(icons/close-white.png) no-repeat center;
+    background-color: none;
+    border: none;
+    right: 4px;
+    top: 5px;
+    padding: 9px 9px;
+    cursor: pointer;
+}
+
+button.clTab:hover {
+    background-color: #444444;
+}
+
+.content {
+    overflow: auto;
+    display: flex;
+    flex: 1;
+}
+
 .sidebar {
     background-color: #272727;
-    width: 365px;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
+    flex: 0 1 365px;
 }
 
 .buttonPanel {
@@ -11,12 +144,14 @@
     height: 50px;
     padding: 5px;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .accPanel {
     display: flex;
     height: 31px;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 button.main {
@@ -91,7 +226,8 @@ button.acc:hover {
     color: lightgray;
     padding-top: 5px;
     padding-bottom: 5px;
-    flex-grow: 1;
+    flex: 1;
+    overflow: auto;
 }
 
 .fileIcon {
@@ -99,61 +235,7 @@ button.acc:hover {
     margin-right: 5px;
 }
 
-.menuBar {
-    background-color: #444444;
-    padding-top: 5px;
-    padding-left: 5px;
-}
-
-.menu {
-    display: inline-block;
-}
-
-.menuButton {
-    color: lightgray;
-    background-color: #444444;
-    border: none;
-    padding: 5px;
-    margin: 1px 0px 1px 0px;
-}
-
-.menuButton:hover {
-    background-color: #555555;
-}
-
-.dropdownContent {
-    position: absolute;
-    display: none;
-    background-color: #272727;
-    width: 250px;
-    z-index: 1;
-}
-
-.menu:hover .menuButton {
-    background-color: #555555;
-}
-
-.menu:hover .dropdownContent {
-    display: block;
-}
-
-.menuItemGroup {
-    border: 1px solid #444444;
-    border-radius: 0;
-}
-
-.menuItem {
-    color: lightgray;
-    background-color: #272727;
-    text-align: left;
-    text-decoration: none;
-    width: 246px;
-    border: none;
-    padding: 5px 7px 5px 27px;
-    margin: 1px 2px 1px 2px;
-}
-
-.menuItem:hover {
-    color: white;
-    background-color: #367c28;
+#container {
+    overflow: auto;
+    flex: 1;
 }

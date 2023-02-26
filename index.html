@@ -19,147 +19,175 @@
 
         <title>Integrated Development Environment</title>
     </head>
-    <body style="margin: 0; display: flex;">
-        <div class="sidebar">
-            <div class="menuBar">
-                <button id="fsB" onclick="toggleFullscreen()" class="menuButton">Fullscreen</button>
-                <div class="menu">
-                    <button class="menuButton">File</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">New Project</button>
-                            <button class="menuItem">New File</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Save</button>
-                            <button class="menuItem">Save As...</button>
-                            <button class="menuItem">Save All</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Close Editor</button>
-                        </div>
+    <body>
+        <div class="menuBar">
+            <div class="menu">
+                <button class="menuButton">File</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">New Project</button>
+                        <button class="menuItem">New File</button>
                     </div>
-                </div>
-                <div class="menu">
-                    <button class="menuButton">Edit</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Undo</button>
-                            <button class="menuItem">Redo</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Cut</button>
-                            <button class="menuItem">Copy</button>
-                            <button class="menuItem">Paste</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Find</button>
-                            <button class="menuItem">Replace</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Toggle Comment</button>
-                        </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Save</button>
+                        <button class="menuItem">Save As...</button>
+                        <button class="menuItem">Save All</button>
                     </div>
-                </div>
-                <div class="menu">
-                    <button class="menuButton">Selection</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Select All</button>
-                            <button class="menuItem">Expand Selection</button>
-                            <button class="menuItem">Shrink Selection</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Add Cursor Above</button>
-                            <button class="menuItem">Add Cursor Below</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Add Next Occurrence</button>
-                            <button class="menuItem">Add Previous Occurrence</button>
-                            <button class="menuItem">Select All Occurrences</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu">
-                    <button class="menuButton">View</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Zoom In</button>
-                            <button class="menuItem">Zoom Out</button>
-                            <button class="menuItem">Reset Zoom</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Word Wrap</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu">
-                    <button class="menuButton">Go</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Back</button>
-                            <button class="menuItem">Forward</button>
-                            <button class="menuItem">Last Edit Location</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Go to Definition</button>
-                            <button class="menuItem">Go to Declaration</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu">
-                    <button class="menuButton">Help</button>
-                    <div class="dropdownContent">
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Get Started</button>
-                            <button class="menuItem">Documentation</button>
-                            <button class="menuItem">Keyboard Shortcut Reference</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">Show Release Notes</button>
-                            <button class="menuItem">Report Issue</button>
-                        </div>
-                        <div class="menuItemGroup">
-                            <button class="menuItem">View License</button>
-                            <button class="menuItem">Privary Statement</button>
-                            <button class="menuItem">About</button>
-                        </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Close Editor</button>
                     </div>
                 </div>
             </div>
-            <div class="buttonPanel">
-                <button class="main"><img src="icons/hammer-icon.png" class="buttonImage"><div class="buttonText">Compile</div></button>
-                <button class="main"><img src="icons/test-icon.png" class="buttonImage"><div class="buttonText">Test</div></button>
-                <button class="main"><img src="icons/deploy-icon.png" class="buttonImage"><div class="buttonText">Deploy</div></button>
-            </div>
-            <div class="filePanel">
-                <div><span style="margin-left: 10px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">my-first-web-service-name</div>
-                <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">api</div>
-                <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
-                <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">docs</div>
-                <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png"  class="fileIcon">src</div>
-                <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
-                <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">test</div>
-                <div><span style="margin-left: 30px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">app.code</div>
-            </div>
-            <div class="buttonPanel">
-                <button class="pay"><div class="buttonText">Postpaid Plans</div></button>
-                <div class="balance">
-                    <div>Balance</div>
-                    <div>₹ 0</div>
+            <div class="menu">
+                <button class="menuButton">Edit</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Undo</button>
+                        <button class="menuItem">Redo</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Cut</button>
+                        <button class="menuItem">Copy</button>
+                        <button class="menuItem">Paste</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Find</button>
+                        <button class="menuItem">Replace</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Toggle Comment</button>
+                    </div>
                 </div>
-                <button class="pay"><div class="buttonText">Recharge</div></button>
             </div>
-            <div class="filePanel">
-                <div><span style="margin-left: 10px;"></span>Live apps</div>
-                <div><span style="margin-left: 20px;"></span><img src="icons/letter-k-white.png" class="fileIcon">my-first-web-service-name</div>
+            <div class="menu">
+                <button class="menuButton">Selection</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Select All</button>
+                        <button class="menuItem">Expand Selection</button>
+                        <button class="menuItem">Shrink Selection</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Add Cursor Above</button>
+                        <button class="menuItem">Add Cursor Below</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Add Next Occurrence</button>
+                        <button class="menuItem">Add Previous Occurrence</button>
+                        <button class="menuItem">Select All Occurrences</button>
+                    </div>
+                </div>
             </div>
-            <div class="accPanel">
-                <button class="acc"><img src="icons/user-icon1.png" class="accButtonImage"><div class="accButtonText">Tanmay</div></button>
-                <div style="flex-grow: 1;"></div>
-                <button class="acc"><img src="icons/settings.png" class="accButtonImage"></button>
+            <div class="menu">
+                <button class="menuButton">View</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Zoom In</button>
+                        <button class="menuItem">Zoom Out</button>
+                        <button class="menuItem">Reset Zoom</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Word Wrap</button>
+                    </div>
+                </div>
             </div>
+            <div class="menu">
+                <button class="menuButton">Go</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Back</button>
+                        <button class="menuItem">Forward</button>
+                        <button class="menuItem">Last Edit Location</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Go to Definition</button>
+                        <button class="menuItem">Go to Declaration</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu">
+                <button class="menuButton">Help</button>
+                <div class="dropdownContent">
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Get Started</button>
+                        <button class="menuItem">Documentation</button>
+                        <button class="menuItem">Keyboard Shortcut Reference</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">Show Release Notes</button>
+                        <button class="menuItem">Report Issue</button>
+                    </div>
+                    <div class="menuItemGroup">
+                        <button class="menuItem">View License</button>
+                        <button class="menuItem">Privary Statement</button>
+                        <button class="menuItem">About</button>
+                    </div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="tabArea">
+                <button class="tab">Filename1.ext</button>
+                <button class="lTab"></button>
+            </div>
+            <div class="tabArea">
+                <button class="tab">Filename2.ext</button>
+                <button class="lTab"></button>
+            </div>
+            <div class="tabArea">
+                <button class="tab">Filename3.ext</button>
+                <button class="lTab"></button>
+            </div>
+            <div class="tabArea">
+                <button class="ctab">Filename4.ext</button>
+                <button class="clTab"></button>
+            </div>
+            <div class="tabArea">
+                <button class="tab">Filename5.ext</button>
+                <button class="lTab"></button>
+            </div>
+            <div class="tabArea">
+                <button class="tab">Filename6.ext</button>
+                <button class="lTab"></button>
+            </div>
+            <div class="sep"></div>
+            <button id="fsB" onclick="toggleFullscreen()" class="menuButton">Fullscreen</button>
         </div>
-        <div id="container" style="flex-grow: 1;"></div>
+        <div class="content">
+            <div class="sidebar">
+                <div class="buttonPanel">
+                    <button class="main"><img src="icons/hammer-icon.png" class="buttonImage"><div class="buttonText">Compile</div></button>
+                    <button class="main"><img src="icons/test-icon.png" class="buttonImage"><div class="buttonText">Test</div></button>
+                    <button class="main"><img src="icons/deploy-icon.png" class="buttonImage"><div class="buttonText">Deploy</div></button>
+                </div>
+                <div class="filePanel">
+                    <div><span style="margin-left: 10px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">my-first-web-service-name</div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">api</div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">docs</div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png"  class="fileIcon">src</div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">test</div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">app.code</div>
+                </div>
+                <div class="buttonPanel">
+                    <button class="pay"><div class="buttonText">Postpaid Plans</div></button>
+                    <div class="balance">
+                        <div>Balance</div>
+                        <div>₹ 0</div>
+                    </div>
+                    <button class="pay"><div class="buttonText">Recharge</div></button>
+                </div>
+                <div class="filePanel">
+                    <div><span style="margin-left: 10px;"></span>Live apps</div>
+                    <div><span style="margin-left: 20px;"></span><img src="icons/letter-k-white.png" class="fileIcon">my-first-web-service-name</div>
+                </div>
+                <div class="accPanel">
+                    <button class="acc"><img src="icons/user-icon1.png" class="accButtonImage"><div class="accButtonText">Tanmay</div></button>
+                    <div style="flex-grow: 1;"></div>
+                    <button class="acc"><img src="icons/settings.png" class="accButtonImage"></button>
+                </div>
+            </div>
+            <div id="container"></div>
+        </div>
     </body>
 </html>
