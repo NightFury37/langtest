@@ -1,4 +1,7 @@
-const code = `
+const code = { "tutorial1.def" : `1`,
+"tutorial2.def" : `2`,
+"tutorial3.def" : `3`,
+"tutorial1.impl" : `
 module libraryname.packagename1.packagename2.FileName;
 
 import libraryname.packagename1.packagename2.ModuleName1 {
@@ -97,4 +100,18 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
         case ok: => goto ok:(userName = name)
     }
 }
-`
+`,
+"tutorial2.impl" : `5`,
+"tutorial3.impl" : `6`,
+"tutorial1.test" : `7`,
+"tutorial2.test" : `8`,
+"tutorial3.test" : `9`,
+"app.code" : `http.Server.create(request => http.Response.text("Hello World"));` };
+
+let session = {
+    tabs : [],
+    tabIndex : {},
+    selectedIndex : -1
+};
+
+let editor = null;

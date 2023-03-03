@@ -125,30 +125,7 @@
                 </div>
             </div>
             <div class="sep"></div>
-            <div class="tabArea">
-                <button class="tab">Filename1.ext</button>
-                <button class="lTab"></button>
-            </div>
-            <div class="tabArea">
-                <button class="tab">Filename2.ext</button>
-                <button class="lTab"></button>
-            </div>
-            <div class="tabArea">
-                <button class="tab">Filename3.ext</button>
-                <button class="lTab"></button>
-            </div>
-            <div class="tabArea">
-                <button class="ctab">Filename4.ext</button>
-                <button class="clTab"></button>
-            </div>
-            <div class="tabArea">
-                <button class="tab">Filename5.ext</button>
-                <button class="lTab"></button>
-            </div>
-            <div class="tabArea">
-                <button class="tab">Filename6.ext</button>
-                <button class="lTab"></button>
-            </div>
+            <div id="tabs"></div>
             <div class="sep"></div>
             <button id="fsB" onclick="toggleFullscreen()" class="menuButton">Fullscreen</button>
         </div>
@@ -162,12 +139,19 @@
                 <div class="filePanel">
                     <div><span style="margin-left: 10px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">my-first-web-service-name</div>
                     <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png" class="fileIcon">api</div>
-                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial1.def')">tutorial1.def</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial2.def')">tutorial2.def</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial3.def')">tutorial3.def</button></div>
                     <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">docs</div>
                     <div><span style="margin-left: 30px;"></span><img src="icons/arrow-down-white.png"  class="fileIcon">src</div>
-                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">ModuleName.code</div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial1.impl')">tutorial1.impl</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial2.impl')">tutorial2.impl</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial3.impl')">tutorial3.impl</button></div>
                     <div><span style="margin-left: 30px;"></span><img src="icons/arrow-right-white.png"  class="fileIcon">test</div>
-                    <div><span style="margin-left: 30px;"></span><img src="icons/letter-k-white.png"  class="fileIcon">app.code</div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial1.test')">tutorial1.test</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial2.test')">tutorial2.test</button></div>
+                    <div><span style="margin-left: 50px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('tutorial3.test')">tutorial3.test</button></div>
+                    <div><span style="margin-left: 30px;"></span><img src="icons/letter-k-white.png"  class="fileIcon"><button class="fileName" onclick="openTab('app.code')">app.code</button></div>
                 </div>
                 <div class="buttonPanel">
                     <button class="pay"><div class="buttonText">Postpaid Plans</div></button>
@@ -187,7 +171,7 @@
                     <button class="acc"><img src="icons/settings.png" class="accButtonImage"></button>
                 </div>
             </div>
-            <div id="container"></div>
+            <div id="container" style="background-color: #161616;"></div>
         </div>
     </body>
 </html>
