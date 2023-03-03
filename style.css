@@ -27,6 +27,19 @@ body {
     background-color: #555555;
 }
 
+.fsButton {
+    background: url(icons/full-screen.png) no-repeat right;
+    color: lightgray;
+    background-color: #444444;
+    border: none;
+    padding: 6px 20px 5px 5px;
+    margin: 0px 0px 1px 0px;
+}
+
+.fsButton:hover {
+    background-color: #555555;
+}
+
 .dropdownContent {
     position: absolute;
     display: none;
