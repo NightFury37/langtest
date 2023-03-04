@@ -1,6 +1,7 @@
 require(['vs/editor/editor.main'], function () {
     monaco.languages.register({
-        id: 'myCustomLanguage'
+        id: 'myCustomLanguage',
+        extensions: ['.def', '.impl', '.test', '.code']
     });
     monaco.languages.setMonarchTokensProvider('myCustomLanguage', syntax);
 
@@ -29,7 +30,7 @@ require(['vs/editor/editor.main'], function () {
         automaticLayout: true
     });
 
-    appendTab(document.getElementById("tabs"), "tutorial1.impl");
+    appendTab(document.getElementById("tabs"), "Tutorial1.impl");
 });
 
 function selectTab(tabs, fileName) {
@@ -54,7 +55,7 @@ function deselectTab(tabs) {
 
 function appendTab(tabs, fileName) {
     session.selectedIndex = session.tabs.length;
-    session.tabs.push({ title : fileName, model : monaco.editor.createModel(code[fileName], 'myCustomLanguage'), viewState : null });
+    session.tabs.push({ title : fileName, model : monaco.editor.createModel(code[fileName], undefined, monaco.Uri.file(fileName)), viewState : null });
     session.tabIndex[fileName] = session.selectedIndex;
     let tab = document.createElement("div");
     tab.className = "tabArea";
@@ -89,6 +90,8 @@ function closeTab(fileName) {
     let index = session.tabIndex[fileName];
     let tabs = document.getElementById("tabs");
     tabs.childNodes[index].remove();
+    session.tabs[index].model.dispose();
+    //session.tabs[index].viewState.dispose();
     session.tabs.splice(index, 1);
     delete session.tabIndex[fileName];
     for (let i = index; i < session.tabs.length; i++) {
@@ -104,6 +107,20 @@ function closeTab(fileName) {
     } else if (index < session.selectedIndex) {
         session.selectedIndex--;
     }
+}
+
+function collapseFolder(id) {
+    let folder = document.getElementById(id);
+    folder.style.display = "none";
+    folder.previousElementSibling.firstChild.nextSibling.setAttribute("src", "icons/arrow-right-white.png");
+    folder.previousElementSibling.onclick = function() { expandFolder(id); };
+}
+
+function expandFolder(id) {
+    let folder = document.getElementById(id);
+    folder.style.display = "block";
+    folder.previousElementSibling.firstChild.nextSibling.setAttribute("src", "icons/arrow-down-white.png");
+    folder.previousElementSibling.onclick = function() { collapseFolder(id); };
 }
 
 function toggleFullscreen() {

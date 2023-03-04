@@ -240,20 +240,35 @@ button.acc:hover {
     color: lightgray;
     padding-top: 5px;
     padding-bottom: 5px;
+    flex: 3;
+    overflow: auto;
+}
+
+.livePanel {
+    color: lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
     flex: 1;
     overflow: auto;
 }
 
+.fileLine {
+    margin: 2px 0px;
+    padding: 2px 0px;
+    cursor: default;
+}
+
+.fileLine:hover {
+    background-color: #444444;
+}
+
 .fileIcon {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-right: 5px;
 }
 
-.fileName {
-    border: none;
-    background-color: #272727;
-    color: lightgray;
-    font-size: medium;
+.folderContents {
+    display: block;
 }
 
 #container {

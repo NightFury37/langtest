@@ -1,76 +1,22 @@
-const code = { "tutorial1.def" : `1`,
-"tutorial2.def" : `2`,
-"tutorial3.def" : `3`,
-"tutorial1.impl" : `
-module libraryname.packagename1.packagename2.FileName;
+const code = { "Tutorial1.def" : `interface myserver.Tutoraial1;
 
-import libraryname.packagename1.packagename2.ModuleName1 {
-    use functionName1 as name1;
-    use functionName2 as name2;
-    use procedureName3 as name3;
-    use TypeName4 as Name4;
-};
-import libraryname.packagename3.ModuleName2;
-import externallibraryname1.packagename4.ModuleName3;
+func square(Integer num) -> Integer
 
-func square(Integer num) -> Integer {
-    return num * num
-}
+func sumOfSquares(Integer first, Integer second) -> Integer
 
-func sumOfSquares(Integer first, Integer second) -> Integer {
-    return square(num = first) + square(num = second)
-}
+func factorial(Integer number, Integer soFar = 1) -> Integer
 
-func factorial(Integer number, Integer soFar = 1) -> Integer {
-    if number < 2
-    then return soFar
-    else goto factorial(number--, soFar *= number)
-}
+func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer`,
 
-func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer {
-    if count < 1
-    then return a
-    else goto fibonacci(count--, a = b, b += a)
-}
+"Tutorial2.def" : `interface myserver.Tutoraial2;
 
-func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C {
-    return x => g(f(x))
-}
+func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C
 
-proc composeTest(String input) -> String {
-    let hFun = compose(f = foo, g = bar);
-    let message = {
-        if hFun(input)
-        then "Less than 5 characters"
-        else "More than 4 characters"
-    };
-    return toUpperCase(message)
+proc composeTest(String input) -> String
 
-    where
+func areaOfCircle(Float radius) -> Float`,
 
-    func foo(String s) -> Integer {
-        return length(s)
-    }
-
-    func bar(Integer i) -> either true: or false: {
-        return i < 5
-    }
-}
-
-func areaOfCircle(Float radius) -> Float {
-    return pi * radius.raisedTo(2)
-
-    where
-
-    val pi = 3.1415926535897932384626
-
-    func Float.raisedTo(Integer power, Float soFar = 1.0) -> Float {
-        if power == 0
-        then return soFar
-        else goto this.raisedTo(power--, soFar *= this)
-    }
-}
-
+"Tutorial3.def" : `interface myserver.Tutoraial3;
 
 proc alloc(Integer size) -> either ok:(Address address) or outOfMemory:
 
@@ -87,8 +33,84 @@ proc size(FileHandle handle) -> Integer
 
 proc read(FileHandle handle, Address address, Integer length) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)
 
+proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)`,
 
-proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace) {
+"readme.md" : `Hello doc`,
+
+"Tutorial1.impl" : `module myserver.Tutoraial1;
+
+func square(Integer num) {
+    return num * num
+}
+
+func sumOfSquares(Integer first, Integer second) {
+    return square(num = first) + square(num = second)
+}
+
+func factorial(Integer number, Integer soFar = 1) {
+    if number < 2
+    then return soFar
+    else goto factorial(number--, soFar *= number)
+}
+
+func fibonacci(Integer count, Integer a = 0, Integer b = 1) {
+    if count < 1
+    then return a
+    else goto fibonacci(count--, a = b, b += a)
+}`,
+
+"Tutorial2.impl" : `module myserver.Tutoraial2;
+
+import libraryname.packagename1.packagename2.ModuleName1 {
+    use functionName1 as name1;
+    use functionName2 as name2;
+    use procedureName3 as name3;
+    use TypeName4 as Name4;
+};
+import libraryname.packagename3.ModuleName2;
+import externallibraryname1.packagename4.ModuleName3;
+
+func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
+    return x => g(f(x))
+}
+
+proc composeTest(String input) {
+    let hFun = compose(f = foo, g = bar);
+    let message = {
+        if hFun(input)
+        then "Less than 5 characters"
+        else "More than 4 characters"
+    };
+    return toUpperCase(message)
+
+    where
+
+    func foo(String s) {
+        return length(s)
+    }
+
+    func bar(Integer i) {
+        return i < 5
+    }
+}
+
+func areaOfCircle(Float radius) {
+    return pi * radius.raisedTo(2)
+
+    where
+
+    val pi = 3.1415926535897932384626
+
+    func Float.raisedTo(Integer power, Float soFar = 1.0) {
+        if power == 0
+        then return soFar
+        else goto this.raisedTo(power--, soFar *= this)
+    }
+}`,
+
+"Tutorial3.impl" : `module myserver.Tutoraial3;
+
+proc readUserNameFromFile(String filePath) {
     match openFile(path = filePath)
     case fileNotFound: => goto err:(trace = createTrace(message = "File not found at : " + filePath))
     case opened:(FileHandle handle) => {
@@ -99,13 +121,14 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
         case endOfFile:(Integer bytesRead) => goto ok:(userName = resize(string = name, newLength = bytesRead))
         case ok: => goto ok:(userName = name)
     }
-}
-`,
-"tutorial2.impl" : `5`,
-"tutorial3.impl" : `6`,
-"tutorial1.test" : `7`,
-"tutorial2.test" : `8`,
-"tutorial3.test" : `9`,
+}`,
+
+"Tutorial1.test" : `test 1`,
+
+"Tutorial2.test" : `test 2`,
+
+"Tutorial3.test" : `test 3`,
+
 "app.code" : `http.Server.create(request => http.Response.text("Hello World"));` };
 
 let session = {
