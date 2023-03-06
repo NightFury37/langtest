@@ -1,4 +1,4 @@
-const code = { "Tutorial1.def" : `interface myserver.Tutoraial1;
+const code = { "Tutorial1.def" : `interface myserver.Tutorial1;
 
 func square(Integer num) -> Integer
 
@@ -8,7 +8,7 @@ func factorial(Integer number, Integer soFar = 1) -> Integer
 
 func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer`,
 
-"Tutorial2.def" : `interface myserver.Tutoraial2;
+"Tutorial2.def" : `interface myserver.Tutorial2;
 
 func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C
 
@@ -16,7 +16,7 @@ proc composeTest(String input) -> String
 
 func areaOfCircle(Float radius) -> Float`,
 
-"Tutorial3.def" : `interface myserver.Tutoraial3;
+"Tutorial3.def" : `interface myserver.Tutorial3;
 
 proc alloc(Integer size) -> either ok:(Address address) or outOfMemory:
 
@@ -37,7 +37,7 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
 
 "readme.md" : `Hello doc`,
 
-"Tutorial1.impl" : `module myserver.Tutoraial1;
+"Tutorial1.impl" : `module myserver.Tutorial1;
 
 func square(Integer num) {
     return num * num
@@ -59,7 +59,7 @@ func fibonacci(Integer count, Integer a = 0, Integer b = 1) {
     else goto fibonacci(count--, a = b, b += a)
 }`,
 
-"Tutorial2.impl" : `module myserver.Tutoraial2;
+"Tutorial2.impl" : `module myserver.Tutorial2;
 
 import libraryname.packagename1.packagename2.ModuleName1 {
     use functionName1 as name1;
@@ -108,7 +108,7 @@ func areaOfCircle(Float radius) {
     }
 }`,
 
-"Tutorial3.impl" : `module myserver.Tutoraial3;
+"Tutorial3.impl" : `module myserver.Tutorial3;
 
 proc readUserNameFromFile(String filePath) {
     match openFile(path = filePath)

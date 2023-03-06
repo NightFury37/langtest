@@ -74,7 +74,7 @@ body {
 
 .menuItem:hover {
     color: white;
-    background-color: #367c28;
+    background-color: #00538C;
 }
 
 .sep {
@@ -155,10 +155,11 @@ button.csTab:hover {
 
 .buttonPanel {
     display: flex;
-    height: 50px;
-    padding: 5px;
+    height: 35px;
+    padding: 5px 10px 0px 10px;
     text-align: center;
     flex-wrap: wrap;
+    background-color: #373737;
 }
 
 .accPanel {
@@ -169,56 +170,56 @@ button.csTab:hover {
 }
 
 button.main {
-    background-color: darkgray;
-    border: 2px solid #272727;
-    border-radius: 5px;
-    transition-duration: 0.2s;
+    background-color: #373737;
+    color: lightgray;
+    border: none;
     cursor: pointer;
 }
 
 button.main:hover {
-    background-color: gold;
+    color: white;
+}
+
+button.main:hover .buttonImage {
+    filter: brightness(1);
 }
 
 button.pay {
-    background-color: #44b92d;
-    border: 5px solid #272727;
-    border-radius: 10px;
-    transition-duration: 0.2s;
+    background-color: #373737;
+    color: lightgray;
+    border: none;
     cursor: pointer;
 }
 
 button.pay:hover {
-    background-color: gold;
+    color: white;
 }
 
 button.acc {
-    background-color: darkgray;
+    background-color: #373737;
+    color: lightgray;
     border: none;
-    padding: 1px 3px 1px 3px;
-    transition-duration: 0.2s;
     cursor: pointer;
 }
 
 button.acc:hover {
-    background-color: gold;
+    color: white;
 }
 
 .buttonImage {
-    float: left;;
-    padding-left: 10px;
+    float: left;
+    filter: brightness(0.7);
 }
 
 .buttonText {
     float: left;
-    font-size: large;
+    font-size: medium;
     line-height: 31px;
     padding-left: 5px;
-    padding-right: 10px;
 }
 
-.accButtonImage {
-    float: left;
+button.acc:hover .buttonImage {
+    filter: brightness(1);
 }
 
 .accButtonText {
@@ -232,8 +233,7 @@ button.acc:hover {
 .balance {
     flex-grow: 1;
     color: gold;
-    padding-top: 5px;
-    font-size: large;
+    font-size: medium;
 }
 
 .filePanel {
