@@ -156,10 +156,10 @@ button.csTab:hover {
 .buttonPanel {
     display: flex;
     height: 35px;
-    padding: 5px 10px 0px 10px;
+    padding: 5px 10px 5px 10px;
     text-align: center;
     flex-wrap: wrap;
-    background-color: #373737;
+    background-color: #333333;
 }
 
 .accPanel {
@@ -170,13 +170,16 @@ button.csTab:hover {
 }
 
 button.main {
-    background-color: #373737;
+    background-color: #444444;
     color: lightgray;
+    padding: 1px 10px;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
 }
 
 button.main:hover {
+    background-color: #555555;
     color: white;
 }
 
@@ -185,28 +188,39 @@ button.main:hover .buttonImage {
 }
 
 button.pay {
-    background-color: #373737;
+    background-color: #444444;
     color: lightgray;
+    padding: 1px 10px;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
 }
 
 button.pay:hover {
+    background-color: #555555;
     color: white;
 }
 
 button.acc {
-    background-color: #373737;
+    background-color: #444444;
     color: lightgray;
     border: none;
     cursor: pointer;
 }
 
 button.acc:hover {
+    background-color: #555555;
     color: white;
 }
 
 .buttonImage {
+    float: left;
+    padding-right: 5px;
+    padding-top: 3px;
+    filter: brightness(0.7);
+}
+
+.smallButtonImage {
     float: left;
     filter: brightness(0.7);
 }
@@ -215,7 +229,6 @@ button.acc:hover {
     float: left;
     font-size: medium;
     line-height: 31px;
-    padding-left: 5px;
 }
 
 button.acc:hover .buttonImage {
@@ -232,8 +245,50 @@ button.acc:hover .buttonImage {
 
 .balance {
     flex-grow: 1;
-    color: gold;
-    font-size: medium;
+    padding: 0px 12px;
+}
+
+.topBar {
+    position: relative;
+    height: 16px;
+    padding-top: 1px;
+}
+
+.bottomBar {
+    position: relative;
+    height: 16px;
+    padding-top: 2px;
+}
+
+.greenBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 16px;
+    background: rgb(79,121,66);
+    background: linear-gradient(0deg, rgba(79,121,66,1) 0%, rgba(3,192,60,1) 40%, rgba(3,192,60,1) 60%, rgba(79,121,66,1) 100%);
+}
+
+.blueBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 85%;
+    height: 16px;
+    background: rgb(42,82,190);
+    background: linear-gradient(0deg, rgba(42,82,190,1) 0%, rgba(12,175,255,1) 40%, rgba(12,175,255,1) 60%, rgba(42,82,190,1) 100%);
+}
+
+.barText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    font-size: small;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px #000000, 0 0 2px #000000;
 }
 
 .filePanel {
