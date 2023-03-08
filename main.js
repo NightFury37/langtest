@@ -63,7 +63,6 @@ function appendTab(tabs, fileName) {
     tabs.appendChild(tab);
     editor.setModel(session.tabs[session.selectedIndex].model);
     editor.restoreViewState(session.tabs[session.selectedIndex].viewState);
-    editor.focus();
 }
 
 function openTab(fileName) {
