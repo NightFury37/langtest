@@ -305,6 +305,16 @@ button.acc:hover .buttonImage {
     text-shadow: 2px 2px 0px #000000, 0 0 2px #000000;
 }
 
+.barCount {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: white;
+    font-size: x-small;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px #000000, 0 0 2px #000000;
+}
+
 .filePanel {
     color: lightgray;
     padding-top: 5px;
@@ -322,9 +332,18 @@ button.acc:hover .buttonImage {
 }
 
 .fileLine {
+    position: relative;
     margin: 2px 0px;
     padding: 2px 0px;
     cursor: default;
+}
+
+.fileCount {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: lightgray;
+    font-size: small;
 }
 
 .fileLine:hover {
