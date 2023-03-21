@@ -4,9 +4,9 @@ func square(Integer num) -> Integer
 
 func sumOfSquares(Integer first, Integer second) -> Integer
 
-func factorial(Integer number, Integer soFar = 1) -> Integer
+func factorial(Integer number) -> Integer
 
-func fibonacci(Integer count, Integer a = 0, Integer b = 1) -> Integer`,
+func fibonacci(Integer count) -> Integer`,
 
 "Tutorial2.def" : `interface myserver.Tutorial2;
 
