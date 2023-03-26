@@ -41,19 +41,22 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
 
 func List(Type E) -> Type
 
-func contains<Type E>(List(E) list, E element) -> either true: or false:
+interface <Type E>(List(E) list) {
 
-func get<Type E>(List(E) list, Integer index) -> either ok:(E element) or indexOutOfBounds:
+    func contains(E element) -> either true: or false:
 
-func set<Type E>(List(E) list, Integer index, E newElement) -> either ok:(List(E) newList) or indexOutOfBounds:
+    func get(Integer index) -> either ok:(E element) or indexOutOfBounds:
 
-proc add<Type E>(List(E) list, E newElement) -> either ok:(List(E) newList) or memoryfull:
+    func set(Integer index, E newElement) -> either ok:(List(E) newList) or indexOutOfBounds:
 
-proc remove<Type E>(List(E) list, Integer index) -> either ok:(List(E) newList) or indexOutOfBounds:
+    proc add(E newElement) -> either ok:(List(E) newList) or memoryfull:
 
-func isEmpty<Type E>(List(E) list) -> either true: or false:
+    proc remove(Integer index) -> either ok:(List(E) newList) or indexOutOfBounds:
 
-func size<Type E>(List(E) list) -> Integer`,
+    func isEmpty() -> either true: or false:
+
+    func size() -> Integer
+}`,
 
 "readme.md" : `Hello doc`,
 
@@ -143,18 +146,22 @@ proc readUserNameFromFile(String filePath) {
     }
 }`,
 
-"ListOps.impl" : `interface myserver.ListOps;
+"ListOps.impl" : `module myserver.ListOps;
 
-func contains<Type E>(List(E) list, E element, Integer index = size(list)) {
-    if index == -1
-    then goto false:
-    elif get(list, index) == element
-    then goto true:
-    else goto contains(list, element, index--)
-}
+module <Type E>(List(E) list) {
 
-func isEmpty<Type E>(List(E) list) {
-    return size(list) == 0
+    func contains(E element, Integer index = size(list)) {
+        if index == -1
+        then goto false:
+        elif get(list, index) == element
+        then goto true:
+        else goto contains(list, element, index--)
+    }
+
+    func isEmpty() {
+        return size(list) == 0
+    }
+
 }`,
 
 "readme.md" : `Hello doc`,
