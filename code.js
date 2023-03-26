@@ -37,6 +37,26 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
 
 "readme.md" : `Hello doc`,
 
+"ListOps.def" : `interface myserver.ListOps;
+
+func List(Type E) -> Type
+
+func contains<Type E>(List(E) list, E element) -> either true: or false:
+
+func get<Type E>(List(E) list, Integer index) -> either ok:(E element) or indexOutOfBounds:
+
+func set<Type E>(List(E) list, Integer index, E newElement) -> either ok:(List(E) newList) or indexOutOfBounds:
+
+proc add<Type E>(List(E) list, E newElement) -> either ok:(List(E) newList) or memoryfull:
+
+proc remove<Type E>(List(E) list, Integer index) -> either ok:(List(E) newList) or indexOutOfBounds:
+
+func isEmpty<Type E>(List(E) list) -> either true: or false:
+
+func size<Type E>(List(E) list) -> Integer`,
+
+"readme.md" : `Hello doc`,
+
 "Tutorial1.impl" : `module myserver.Tutorial1;
 
 func square(Integer num) {
@@ -122,6 +142,22 @@ proc readUserNameFromFile(String filePath) {
         case ok: => goto ok:(userName = name)
     }
 }`,
+
+"ListOps.impl" : `interface myserver.ListOps;
+
+func contains<Type E>(List(E) list, E element, Integer index = size(list)) {
+    if index == -1
+    then goto false:
+    elif get(list, index) == element
+    then goto true:
+    else goto contains(list, element, index--)
+}
+
+func isEmpty<Type E>(List(E) list) {
+    return size(list) == 0
+}`,
+
+"readme.md" : `Hello doc`,
 
 "Tutorial1.test" : `test 1`,
 
