@@ -37,26 +37,30 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
 
 "readme.md" : `Hello doc`,
 
-"ListOps.def" : `interface myserver.ListOps;
+"ListOps.def" : `interface myserver.ListOps(Type Elem, Type List);
 
-func List(Type E) -> Type
+using (List list) {
 
-interface <Type E>(List(E) list) {
+    func contains(Elem element) -> either true: or false:
 
-    func contains(E element) -> either true: or false:
+    func get(Integer index) -> either ok:(Elem element) or indexOutOfBounds:
 
-    func get(Integer index) -> either ok:(E element) or indexOutOfBounds:
+    func set(Integer index, Elem newElement) -> either ok:(List newList) or indexOutOfBounds:
 
-    func set(Integer index, E newElement) -> either ok:(List(E) newList) or indexOutOfBounds:
+    proc add(Elem newElement) -> either ok:(List newList) or memoryfull:
 
-    proc add(E newElement) -> either ok:(List(E) newList) or memoryfull:
-
-    proc remove(Integer index) -> either ok:(List(E) newList) or indexOutOfBounds:
+    proc remove(Integer index) -> either ok:(List newList) or indexOutOfBounds:
 
     func isEmpty() -> either true: or false:
 
     func size() -> Integer
 }`,
+
+"ArrayListOps.def" : `interface myserver.ArrayListOps(Type Elem);
+
+Type ArrayList
+
+implements myserver.ListOps(Elem, ArrayList)`,
 
 "readme.md" : `Hello doc`,
 
@@ -146,20 +150,48 @@ proc readUserNameFromFile(String filePath) {
     }
 }`,
 
-"ListOps.impl" : `module myserver.ListOps;
+"ListOps.impl" : `module myserver.ListOps(Type Elem, Type List);
 
-module <Type E>(List(E) list) {
+using (List list) {
 
-    func contains(E element, Integer index = size(list)) {
+    func contains(Elem element, Integer index = list.size()) {
         if index == -1
         then goto false:
-        elif get(list, index) == element
+        elif list.get(index) == element
         then goto true:
-        else goto contains(list, element, index--)
+        else goto list.contains(element, index--)
     }
 
     func isEmpty() {
-        return size(list) == 0
+        return list.size() == 0
+    }
+
+}`,
+
+"ArrayListOps.impl" : `module myserver.ArrayListOps;
+
+Type ArrayList = record(Elem[] array, Integer size, Integer capacity)
+
+using (ArrayList list) {
+
+    func get(Integer index) {
+
+    }
+
+    func set(Integer index, Elem newElement) {
+
+    }
+
+    proc add(Elem newElement) {
+
+    }
+
+    proc remove(Integer index) {
+
+    }
+
+    func size() {
+        return list.size
     }
 
 }`,
