@@ -7,12 +7,12 @@ const syntax = {
         'let', 'where', 'return', 'goto',
         'if', 'then', 'else', 'elif',
         'import', 'as', 'use',
-        'module', 'interface', 'implements',
-        'using', 'record'
+        'module', 'interface', 'include',
+        'using', 'record', 'type'
     ],
     
     typeKeywords: [
-        'Type', 'bool', 'byte', 'i8', 'i16', 'i32', 'i64', 'u8', 'u16', 'u32', 'u64', 'char', 'void', 'f32', 'f64'
+        'bool', 'byte', 'i8', 'i16', 'i32', 'i64', 'u8', 'u16', 'u32', 'u64', 'char', 'void', 'f32', 'f64'
     ],
     
     operators: [

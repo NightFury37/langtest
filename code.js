@@ -10,7 +10,7 @@ func fibonacci(Integer count) -> Integer`,
 
 "Tutorial2.def" : `interface myserver.Tutorial2;
 
-func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C
+func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) -> func (A a) -> C
 
 proc composeTest(String input) -> String
 
@@ -37,7 +37,7 @@ proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer b
 
 "readme.md" : `Hello doc`,
 
-"ListOps.def" : `interface myserver.ListOps(Type Elem, Type List);
+"ListOps.def" : `interface myserver.ListOps(type Elem, type List);
 
 using (List list) {
 
@@ -56,11 +56,11 @@ using (List list) {
     func size() -> Integer
 }`,
 
-"ArrayListOps.def" : `interface myserver.ArrayListOps(Type Elem);
+"ArrayListOps.def" : `interface myserver.ArrayListOps(type Elem);
 
-Type ArrayList
+type ArrayList
 
-implements myserver.ListOps(Elem, ArrayList)`,
+include myserver.ListOps(Elem, ArrayList)`,
 
 "readme.md" : `Hello doc`,
 
@@ -97,7 +97,7 @@ import libraryname.packagename1.packagename2.ModuleName1 {
 import libraryname.packagename3.ModuleName2;
 import externallibraryname1.packagename4.ModuleName3;
 
-func compose<Type A, Type B, Type C>(func f(A a) -> B, func g(B b) -> C) {
+func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) {
     return x => g(f(x))
 }
 
@@ -168,26 +168,49 @@ using (List list) {
 
 }`,
 
-"ArrayListOps.impl" : `module myserver.ArrayListOps;
+"ArrayListOps.impl" : `module myserver.ArrayListOps(Type Elem);
 
-Type ArrayList = record(Elem[] array, Integer size, Integer capacity)
+type ArrayList = record {
+    Elem[] array;
+    Integer size;
+    Integer capacity;
+}
 
 using (ArrayList list) {
 
     func get(Integer index) {
-
+        if index < 0 or index >= list.size
+        then goto indexOutOfBounds:
+        else goto ok:(list.array.get(index))
     }
 
-    func set(Integer index, Elem newElement) {
-
+    proc set(Integer index, Elem newElement) {
+        if index < 0 or index >= list.size
+        then goto indexOutOfBounds:
+        else goto ok:(list.array.set(index, newElement))
     }
 
     proc add(Elem newElement) {
-
+        if list.size < list.capacity
+        then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
+        else {
+            let newCapacity = list.capacity * 2;
+            match alloc(newCapacity)
+            case ok:(Address address) => {
+                let newArray = Array.copy(src = list.array, dest = Array(Elem, address), length = list.size);
+                goto ok:(ArrayList(newArray.set(list.size, newElement), list.size + 1, newCapacity))
+            }
+            case outOfMemory: => goto memoryfull:
+        }
     }
 
     proc remove(Integer index) {
-
+        if index < 0 or index >= list.size
+        then goto indexOutOfBounds:
+        else {
+            let newArray = Array.move(list.array, fromIndex = index + 1, toIndex = index, length = list.size - index - 1);
+            goto ok:(ArrayList(newArray, list.size - 1, list.capacity))
+        }
     }
 
     func size() {
