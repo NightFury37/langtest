@@ -18,49 +18,49 @@ func areaOfCircle(Float radius) -> Float`,
 
 "Tutorial3.def" : `interface myserver.Tutorial3;
 
-proc alloc(Integer size) -> either ok:(Address address) or outOfMemory:
+proc alloc(Integer size)                                      -> ok:(Address address) or outOfMemory:
 
-proc realloc(Address previousLocation, Integer newSize) -> either ok:(Address address) or outOfMemory:
+proc realloc(Address previousLocation, Integer newSize)       -> ok:(Address address) or outOfMemory:
 
-proc dealloc(Address location) -> either ok: or err:(Trace trace)
+proc dealloc(Address location)                                -> ok: or err:(Trace trace)
 
 
-proc createFile(String path) -> either created:(FileHandle handle) or failed:
+proc createFile(String path)                                  -> created:(FileHandle handle) or failed:
 
-proc openFile(String path) -> either opened:(FileHandle handle) or fileNotFound:
+proc openFile(String path, read: or write: or append:)        -> opened:(FileHandle handle) or fileNotFound:
 
-proc size(FileHandle handle) -> Integer
+proc size(FileHandle handle)                                  -> Integer
 
-proc read(FileHandle handle, Address address, Integer length) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)
+proc read(FileHandle handle, Address address, Integer length) -> ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)
 
-proc readUserNameFromFile(String filePath) -> either ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)`,
+proc readUserNameFromFile(String filePath)                    -> ok: or endOfFile:(Integer bytesRead) or err:(Trace trace)`,
 
 "readme.md" : `Hello doc`,
 
 "ListOps.def" : `interface myserver.ListOps(type Elem, type List);
 
-using (List list) {
+impl List {
 
-    func contains(Elem element) -> either true: or false:
+    func list.contains(Elem element)              -> true: or false:
 
-    func get(Integer index) -> either ok:(Elem element) or indexOutOfBounds:
+    func list.get(Integer index)                  -> ok:(Elem element) or indexOutOfBounds:
 
-    func set(Integer index, Elem newElement) -> either ok:(List newList) or indexOutOfBounds:
+    func list.set(Integer index, Elem newElement) -> ok:(List newList) or indexOutOfBounds:
 
-    proc add(Elem newElement) -> either ok:(List newList) or memoryfull:
+    proc list.add(Elem newElement)                -> ok:(List newList) or memoryfull:
 
-    proc remove(Integer index) -> either ok:(List newList) or indexOutOfBounds:
+    proc list.remove(Integer index)               -> ok:(List newList) or indexOutOfBounds:
 
-    func isEmpty() -> either true: or false:
+    func list.isEmpty()                           -> true: or false:
 
-    func size() -> Integer
+    func list.size()                              -> Integer
 }`,
 
 "ArrayListOps.def" : `interface myserver.ArrayListOps(type Elem);
 
 type ArrayList
 
-include myserver.ListOps(Elem, ArrayList)`,
+inherit ListOps(Elem, ArrayList)`,
 
 "readme.md" : `Hello doc`,
 
@@ -128,14 +128,26 @@ func areaOfCircle(Float radius) {
 
     val pi = 3.1415926535897932384626
 
-    func Float.raisedTo(Integer power, Float soFar = 1.0) {
-        if power == 0
-        then return soFar
-        else goto this.raisedTo(power--, soFar *= this)
+    impl Float {
+        func num.raisedTo(Integer power, Float soFar = 1.0) {
+            if power == 0
+            then return soFar
+            else goto num.raisedTo(power--, soFar *= num)
+        }
     }
 }`,
 
 "Tutorial3.impl" : `module myserver.Tutorial3;
+
+proc openFile(String path, read:) {
+
+}
+proc openFile(String path, write:) {
+
+}
+proc openFile(String path, append:) {
+
+}
 
 proc readUserNameFromFile(String filePath) {
     match openFile(path = filePath)
@@ -152,9 +164,9 @@ proc readUserNameFromFile(String filePath) {
 
 "ListOps.impl" : `module myserver.ListOps(Type Elem, Type List);
 
-using (List list) {
+impl List {
 
-    func contains(Elem element, Integer index = list.size()) {
+    func list.contains(Elem element, Integer index = list.size()) {
         if index == -1
         then goto false:
         elif list.get(index) == element
@@ -162,7 +174,7 @@ using (List list) {
         else goto list.contains(element, index--)
     }
 
-    func isEmpty() {
+    func list.isEmpty() {
         return list.size() == 0
     }
 
@@ -176,21 +188,21 @@ type ArrayList = record {
     Integer capacity;
 }
 
-using (ArrayList list) {
+impl ArrayList {
 
-    func get(Integer index) {
+    func list.get(Integer index) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else goto ok:(list.array.get(index))
     }
 
-    proc set(Integer index, Elem newElement) {
+    proc list.set(Integer index, Elem newElement) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else goto ok:(list.array.set(index, newElement))
     }
 
-    proc add(Elem newElement) {
+    proc list.add(Elem newElement) {
         if list.size < list.capacity
         then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
         else {
@@ -204,7 +216,7 @@ using (ArrayList list) {
         }
     }
 
-    proc remove(Integer index) {
+    proc list.remove(Integer index) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else {
@@ -213,7 +225,7 @@ using (ArrayList list) {
         }
     }
 
-    func size() {
+    func list.size() {
         return list.size
     }
 

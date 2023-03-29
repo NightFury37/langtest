@@ -3,12 +3,12 @@ const syntax = {
     
     keywords: [
         'proc', 'func', 'val', 'this',
-        'either', 'or', 'match', 'case',
+        'or', 'match', 'case',
         'let', 'where', 'return', 'goto',
         'if', 'then', 'else', 'elif',
         'import', 'as', 'use',
-        'module', 'interface', 'include',
-        'using', 'record', 'type'
+        'module', 'interface', 'inherit',
+        'impl', 'record', 'type'
     ],
     
     typeKeywords: [
@@ -33,11 +33,11 @@ const syntax = {
         root: [
 
         // function and procedure definitions
+        [/(func\s+|proc\s+|val\s+)([a-z_][\w$]*)(\.)([a-z_][\w$]*)/, ['keyword', 'identifier', 'operator', 'definition' ] ],
         [/(func\s+|proc\s+|val\s+)([a-z_][\w$]*)/, ['keyword', 'definition' ] ],
 
         // labels
-        [/(either\s+|case\s+|or\s+|goto\s+)([a-z_][\w$]*:)/, ['keyword', 'label'] ],
-        [/[a-z_$][\w$]*:/, 'argument.label'],
+        [/[a-z_$][\w$]*:/, 'label'],
 
         // identifiers and keywords
         [/[a-z_$][\w$]*(?=\()/, { cases: { '@typeKeywords': 'type.identifier',
