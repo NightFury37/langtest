@@ -62,6 +62,14 @@ type ArrayList
 
 inherit ListOps(Elem, ArrayList)`,
 
+"Ast.def" : `interface Ast;
+
+type Symbol
+
+type Expression
+
+type ModuleDefinition`,
+
 "readme.md" : `Hello doc`,
 
 "Tutorial1.impl" : `module myserver.Tutorial1;
@@ -231,7 +239,53 @@ impl ArrayList {
 
 }`,
 
-"readme.md" : `Hello doc`,
+"Ast.impl" : `module Ast;
+
+type Symbol = record {
+    u64 hashcode;
+    u32 textOffset;
+    u32 length;
+}
+
+type Expression = record {
+
+}
+
+type ModuleDefinition = record {
+    Symbol name;
+    ConstantDefinition[] constantMembers;
+    RecordDefinition[] recordMembers;
+    FunctionDefinition[] functionDefinitions;
+    ProcedureDefinition[] procedureDefinitions;
+
+    where
+
+    type ConstantDefinition = record {
+        Symbol name;
+        Expression typeExpression;
+        Expression valueExpression;
+    }
+
+    type RecordDefinition = record {
+        Symbol name;
+        Field[] fields;
+
+        where
+
+        type Field = record {
+            Symbol name;
+            Expression typeExpression;
+        }
+    }
+
+    type FunctionDefinition = record {
+
+    }
+
+    type ProcedureDefinition = record {
+
+    }
+}`,
 
 "Tutorial1.test" : `test 1`,
 
