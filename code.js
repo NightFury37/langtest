@@ -39,21 +39,21 @@ proc readUserNameFromFile(String filePath)                    -> ok: or endOfFil
 
 "ListOps.def" : `interface myserver.ListOps(type Elem, type List);
 
-impl List {
+infix List list {
 
-    func list.contains(Elem element)              -> true: or false:
+    func contains(Elem element)              -> true: or false:
 
-    func list.get(Integer index)                  -> ok:(Elem element) or indexOutOfBounds:
+    func get(Integer index)                  -> ok:(Elem element) or indexOutOfBounds:
 
-    func list.set(Integer index, Elem newElement) -> ok:(List newList) or indexOutOfBounds:
+    func set(Integer index, Elem newElement) -> ok:(List newList) or indexOutOfBounds:
 
-    proc list.add(Elem newElement)                -> ok:(List newList) or memoryfull:
+    proc add(Elem newElement)                -> ok:(List newList) or memoryfull:
 
-    proc list.remove(Integer index)               -> ok:(List newList) or indexOutOfBounds:
+    proc remove(Integer index)               -> ok:(List newList) or indexOutOfBounds:
 
-    func list.isEmpty()                           -> true: or false:
+    func isEmpty()                           -> true: or false:
 
-    func list.size()                              -> Integer
+    func size()                              -> Integer
 }`,
 
 "ArrayListOps.def" : `interface myserver.ArrayListOps(type Elem);
@@ -136,8 +136,8 @@ func areaOfCircle(Float radius) {
 
     val pi = 3.1415926535897932384626
 
-    impl Float {
-        func num.raisedTo(Integer power, Float soFar = 1.0) {
+    infix Float num {
+        func raisedTo(Integer power, Float soFar = 1.0) {
             if power == 0
             then return soFar
             else goto num.raisedTo(power--, soFar *= num)
@@ -172,9 +172,9 @@ proc readUserNameFromFile(String filePath) {
 
 "ListOps.impl" : `module myserver.ListOps(Type Elem, Type List);
 
-impl List {
+infix List list {
 
-    func list.contains(Elem element, Integer index = list.size()) {
+    func contains(Elem element, Integer index = list.size()) {
         if index == -1
         then goto false:
         elif list.get(index) == element
@@ -182,7 +182,7 @@ impl List {
         else goto list.contains(element, index--)
     }
 
-    func list.isEmpty() {
+    func isEmpty() {
         return list.size() == 0
     }
 
@@ -196,21 +196,21 @@ type ArrayList = record {
     Integer capacity;
 }
 
-impl ArrayList {
+infix ArrayList list {
 
-    func list.get(Integer index) {
+    func get(Integer index) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else goto ok:(list.array.get(index))
     }
 
-    proc list.set(Integer index, Elem newElement) {
+    proc set(Integer index, Elem newElement) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else goto ok:(list.array.set(index, newElement))
     }
 
-    proc list.add(Elem newElement) {
+    proc add(Elem newElement) {
         if list.size < list.capacity
         then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
         else {
@@ -224,7 +224,7 @@ impl ArrayList {
         }
     }
 
-    proc list.remove(Integer index) {
+    proc remove(Integer index) {
         if index < 0 or index >= list.size
         then goto indexOutOfBounds:
         else {
@@ -233,7 +233,7 @@ impl ArrayList {
         }
     }
 
-    func list.size() {
+    func size() {
         return list.size
     }
 

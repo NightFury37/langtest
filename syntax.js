@@ -8,7 +8,7 @@ const syntax = {
         'if', 'then', 'else', 'elif',
         'import', 'as', 'use',
         'module', 'interface', 'inherit',
-        'impl', 'record', 'type'
+        'infix', 'record', 'type'
     ],
     
     typeKeywords: [
