@@ -74,24 +74,77 @@ type ModuleDefinition`,
 
 "Tutorial1.impl" : `module myserver.Tutorial1;
 
+func square(Integer num) => num * num
+
 func square(Integer num) {
     return num * num
 }
+
+func sumOfSquares(Integer first, Integer second) => square(num = first) + square(num = second)
 
 func sumOfSquares(Integer first, Integer second) {
     return square(num = first) + square(num = second)
 }
 
-func factorial(Integer number, Integer soFar = 1) {
-    if number < 2
-    then return soFar
-    else goto factorial(number--, soFar *= number)
+func max(Integer a, Integer b) {
+    if a < b then return b
+    else return a
 }
 
-func fibonacci(Integer count, Integer a = 0, Integer b = 1) {
-    if count < 1
-    then return a
-    else goto fibonacci(count--, a = b, b += a)
+// Unlabeled block expression
+func factorial(Integer number) => call (number, result = 1) {
+    if number < 2 then return result
+    else continue (number--, answer *= number)
+}
+
+// Unlabeled block statement
+func factorial(Integer number) {
+    goto (number, result = 1) {
+        if number < 2 then return result
+        else continue (number--, answer *= number)
+    }
+}
+
+// Labeled block expression
+func factorial(Integer number) => call iter:(number, result = 1) {
+    if number < 2 then return result
+    else continue iter:(number--, answer *= number)
+}
+
+// Labeled block statement
+func factorial(Integer number) {
+    goto iter:(number, result = 1) {
+        if number < 2 then return result
+        else continue iter:(number--, answer *= number)
+    }
+}
+
+// Unlabeled block expression
+func fibonacci(Integer count) => call (count, a = 0, b = 1) {
+    if count < 1 then return a
+    else continue (count--, a = b, b += a)
+}
+
+// Unlabeled block statement
+func fibonacci(Integer count) {
+    goto (count, a = 0, b = 1) {
+        if count < 1 then return a
+        else continue (count--, a = b, b += a)
+    }
+}
+
+// Labeled block expression
+func fibonacci(Integer count) => call iter:(count, a = 0, b = 1) {
+    if count < 1 then return a
+    else continue iter:(count--, a = b, b += a)
+}
+
+// Labeled block statement
+func fibonacci(Integer count) {
+    goto iter:(count, a = 0, b = 1) {
+        if count < 1 then return a
+        else continue iter:(count--, a = b, b += a)
+    }
 }`,
 
 "Tutorial2.impl" : `module myserver.Tutorial2;
@@ -111,11 +164,7 @@ func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) {
 
 proc composeTest(String input) {
     let hFun = compose(f = foo, g = bar);
-    let message = {
-        if hFun(input)
-        then "Less than 5 characters"
-        else "More than 4 characters"
-    };
+    let message = if hFun(input) then "Less than 5 characters" else "More than 4 characters";
     return toUpperCase(message)
 
     where
@@ -137,10 +186,9 @@ func areaOfCircle(Float radius) {
     val pi = 3.1415926535897932384626
 
     infix Float num {
-        func raisedTo(Integer power, Float soFar = 1.0) {
-            if power == 0
-            then return soFar
-            else goto num.raisedTo(power--, soFar *= num)
+        func raisedTo(Integer power) => call (power, result = 1) {
+            if power == 0 then return result
+            else continue (power--, soFar *= num)
         }
     }
 }`,
@@ -174,12 +222,10 @@ proc readUserNameFromFile(String filePath) {
 
 infix List list {
 
-    func contains(Elem element, Integer index = list.size()) {
-        if index == -1
-        then goto false:
-        elif list.get(index) == element
-        then goto true:
-        else goto list.contains(element, index--)
+    func contains(Elem element) => call (index = list.size()) {
+        if index == -1 then goto false:
+        if list.get(index) == element then goto true:
+        else continue (index--)
     }
 
     func isEmpty() {
@@ -199,38 +245,32 @@ type ArrayList = record {
 infix ArrayList list {
 
     func get(Integer index) {
-        if index < 0 or index >= list.size
-        then goto indexOutOfBounds:
+        if index < 0 or index >= list.size then goto indexOutOfBounds:
         else goto ok:(list.array.get(index))
     }
 
     proc set(Integer index, Elem newElement) {
-        if index < 0 or index >= list.size
-        then goto indexOutOfBounds:
+        if index < 0 or index >= list.size then goto indexOutOfBounds:
         else goto ok:(list.array.set(index, newElement))
     }
 
     proc add(Elem newElement) {
-        if list.size < list.capacity
-        then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
-        else {
-            let newCapacity = list.capacity * 2;
-            match alloc(newCapacity)
-            case ok:(Address address) => {
-                let newArray = Array.copy(src = list.array, dest = Array(Elem, address), length = list.size);
-                goto ok:(ArrayList(newArray.set(list.size, newElement), list.size + 1, newCapacity))
-            }
-            case outOfMemory: => goto memoryfull:
+        if list.size < list.capacity then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
+        else
+        let newCapacity = list.capacity * 2;
+        match alloc(newCapacity)
+        case ok:(Address address) {
+            let newArray = Array.copy(src = list.array, dest = Array(Elem, address), length = list.size);
+            goto ok:(ArrayList(newArray.set(list.size, newElement), list.size + 1, newCapacity))
         }
+        case outOfMemory: => goto memoryfull:
     }
 
     proc remove(Integer index) {
-        if index < 0 or index >= list.size
-        then goto indexOutOfBounds:
-        else {
-            let newArray = Array.move(list.array, fromIndex = index + 1, toIndex = index, length = list.size - index - 1);
-            goto ok:(ArrayList(newArray, list.size - 1, list.capacity))
-        }
+        if index < 0 or index >= list.size then goto indexOutOfBounds:
+        else
+        let newArray = Array.move(list.array, fromIndex = index + 1, toIndex = index, length = list.size - index - 1);
+        goto ok:(ArrayList(newArray, list.size - 1, list.capacity))
     }
 
     func size() {

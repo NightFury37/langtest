@@ -5,7 +5,7 @@ const syntax = {
         'proc', 'func', 'val', 'this',
         'or', 'match', 'case',
         'let', 'where', 'return', 'goto',
-        'if', 'then', 'else', 'elif',
+        'if', 'then', 'else', 'do', 'call', 'continue',
         'import', 'as', 'use',
         'module', 'interface', 'inherit',
         'infix', 'record', 'type'
