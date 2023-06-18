@@ -14,7 +14,9 @@ func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) -> func
 
 proc composeTest(String input) -> String
 
-func areaOfCircle(Float radius) -> Float`,
+func areaOfCircle(Float radius) -> Float
+
+proc sort(u32 size, i32[size] array)`,
 
 "Tutorial3.def" : `interface myserver.Tutorial3;
 
@@ -94,56 +96,56 @@ func max(Integer a, Integer b) {
 // Unlabeled block expression
 func factorial(Integer number) => call (number, result = 1) {
     if number < 2 then return result
-    else continue (number--, answer *= number)
+    else repeat (number--, result *= number)
 }
 
 // Unlabeled block statement
 func factorial(Integer number) {
-    goto (number, result = 1) {
+    do (number, result = 1) {
         if number < 2 then return result
-        else continue (number--, answer *= number)
+        else repeat (number--, result *= number)
     }
 }
 
 // Labeled block expression
 func factorial(Integer number) => call iter:(number, result = 1) {
     if number < 2 then return result
-    else continue iter:(number--, answer *= number)
+    else repeat iter:(number--, result *= number)
 }
 
 // Labeled block statement
 func factorial(Integer number) {
-    goto iter:(number, result = 1) {
+    do iter:(number, result = 1) {
         if number < 2 then return result
-        else continue iter:(number--, answer *= number)
+        else repeat iter:(number--, result *= number)
     }
 }
 
 // Unlabeled block expression
 func fibonacci(Integer count) => call (count, a = 0, b = 1) {
     if count < 1 then return a
-    else continue (count--, a = b, b += a)
+    else repeat (count--, a = b, b += a)
 }
 
 // Unlabeled block statement
 func fibonacci(Integer count) {
-    goto (count, a = 0, b = 1) {
+    do (count, a = 0, b = 1) {
         if count < 1 then return a
-        else continue (count--, a = b, b += a)
+        else repeat (count--, a = b, b += a)
     }
 }
 
 // Labeled block expression
 func fibonacci(Integer count) => call iter:(count, a = 0, b = 1) {
     if count < 1 then return a
-    else continue iter:(count--, a = b, b += a)
+    else repeat iter:(count--, a = b, b += a)
 }
 
 // Labeled block statement
 func fibonacci(Integer count) {
-    goto iter:(count, a = 0, b = 1) {
+    do iter:(count, a = 0, b = 1) {
         if count < 1 then return a
-        else continue iter:(count--, a = b, b += a)
+        else repeat iter:(count--, a = b, b += a)
     }
 }`,
 
@@ -189,6 +191,23 @@ func areaOfCircle(Float radius) {
         func raisedTo(Integer power) => call (power, result = 1) {
             if power == 0 then return result
             else continue (power--, soFar *= num)
+        }
+    }
+}
+
+proc sort(u32 size, i32[size] array) {
+    do bubble:(n = size) {
+        if n < 2 then return
+        else do inner:(u32 j = 1, u32 newN = 0) {
+    	    if j > n then goto bubble:(n = newN)
+    	    if array[j - 1] < array[j] then goto inner:(j++)
+            else
+            
+            let temp = array[j - 1];
+            set array[j - 1] = array[j];
+            set array[j] = temp;
+
+            goto inner:(j++, newN = j)
         }
     }
 }`,
