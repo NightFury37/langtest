@@ -202,12 +202,45 @@ proc sort(u32 size, i32[size] array) {
     	    if j > n then goto bubble:(n = newN)
     	    if array[j - 1] < array[j] then goto inner:(j++)
             else
-            
+
             let temp = array[j - 1];
             set array[j - 1] = array[j];
             set array[j] = temp;
 
             goto inner:(j++, newN = j)
+        }
+    }
+}
+
+proc sort(u32 size, i32[size] array) {
+    quickSort(0, size - 1)
+
+
+    where
+
+
+    proc quickSort(u32 lo, u32 hi) {
+        if lo < hi then {
+            let p = partition(lo - 1, hi + 1);
+            quickSort(lo, p);
+            quickSort(p + 1, hi);
+        }
+    }
+
+
+    proc partition(u32 lo, u32 hi) {
+        let pivot = array[lo + (hi - lo) / 2];
+        do (lo, hi) {
+            let i = for (lo; array[lo] < pivot; lo++) => lo;
+            let j = for (hi; array[hi] > pivot; hi--) => hi;
+            if i >= j then return j
+            else
+
+            let temp = array[j];
+            set array[j] = array[i];
+            set array[i] = temp;
+           
+            repeat (lo = i, hi = j)
         }
     }
 }`,

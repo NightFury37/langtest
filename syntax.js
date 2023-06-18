@@ -6,7 +6,7 @@ const syntax = {
         'or', 'match', 'case',
         'let', 'where', 'return', 'goto',
         'if', 'then', 'else', 'do', 'call', 'continue',
-        'import', 'as', 'use', 'set',
+        'import', 'as', 'use', 'set', 'for',
         'module', 'interface', 'inherit',
         'infix', 'record', 'type', 'repeat'
     ],
