@@ -21,6 +21,10 @@ const syntax = {
         '<<', '>>', '>>>', '+=', '-=', '*=', '/=', '&=', '|=', '^=',
         '%=', '<<=', '>>=', '>>>=', '=>', '<-'
     ],
+
+    keyOperators: [
+        '|>'
+    ],
     
     // we include these common regular expressions
     symbols:  /[=><!~?:&|+\-*\/\^%]+/,
@@ -55,7 +59,8 @@ const syntax = {
         // delimiters and operators
         [/[{}()\[\]]/, '@brackets'],
         [/[<>](?!@symbols)/, '@brackets'],
-        [/@symbols/, { cases: { '@operators': 'operator',
+        [/@symbols/, { cases: { '@keyOperators': 'keyword',
+                                '@operators': 'operator',
                                 '@default'  : '' } } ],
     
         // @ annotations.

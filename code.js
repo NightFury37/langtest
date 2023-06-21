@@ -89,62 +89,62 @@ func sumOfSquares(Integer first, Integer second) {
 }
 
 func max(Integer a, Integer b) {
-    if (a < b) return b
+    if a < b then return b;
     return a
 }
 
 // Unlabeled block expression
 func factorial(Integer number) => call (number, result = 1) {
-    if (number < 2) return result
+    if number < 2 then return result;
     repeat (number--, result *= number)
 }
 
 // Unlabeled block statement
 func factorial(Integer number) {
     return call (number, result = 1) {
-        if (number < 2) return result
+        if number < 2 then return result;
         repeat (number--, result *= number)
     }
 }
 
 // Labeled block expression
 func factorial(Integer number) => call iter:(number, result = 1) {
-    if (number < 2) return result
+    if number < 2 then return result;
     repeat iter:(number--, result *= number)
 }
 
 // Labeled block statement
 func factorial(Integer number) {
     return call iter:(number, result = 1) {
-        if (number < 2) return result
+        if number < 2 then return result;
         repeat iter:(number--, result *= number)
     }
 }
 
 // Unlabeled block expression
 func fibonacci(Integer count) => call (count, a = 0, b = 1) {
-    if (count < 1) return a
+    if count < 1 then return a;
     repeat (count--, a = b, b += a)
 }
 
 // Unlabeled block statement
 func fibonacci(Integer count) {
     return call (count, a = 0, b = 1) {
-        if (count < 1) return a
+        if count < 1 then return a;
         repeat (count--, a = b, b += a)
     }
 }
 
 // Labeled block expression
 func fibonacci(Integer count) => call iter:(count, a = 0, b = 1) {
-    if (count < 1) return a
+    if count < 1 then return a;
     repeat iter:(count--, a = b, b += a)
 }
 
 // Labeled block statement
 func fibonacci(Integer count) {
     return call iter:(count, a = 0, b = 1) {
-        if (count < 1) return a
+        if count < 1 then return a;
         repeat iter:(count--, a = b, b += a)
     }
 }`,
@@ -166,7 +166,7 @@ func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) {
 
 proc composeTest(String input) {
     let hFun = compose(f = foo, g = bar);
-    let message = hFun(input) ? "Less than 5 characters" : "More than 4 characters";
+    let message = if hFun(input) then "Less than 5 characters" else "More than 4 characters";
     return toUpperCase(message)
 
     where
@@ -189,7 +189,7 @@ func areaOfCircle(Float radius) {
 
     infix Float num {
         func raisedTo(Integer power) => call (power, result = 1) {
-            if (power == 0) return result
+            if power == 0 then return result;
             repeat (power--, soFar *= num)
         }
     }
@@ -197,16 +197,16 @@ func areaOfCircle(Float radius) {
 
 proc sort(u32 size, i32[size] array) {
     return call bubble:(n = size) {
-        if (n < 2) return
-        return call inner:(u32 j = 1, u32 newN = 0) {
-    	    if (j > n) goto bubble:(n = newN)
-    	    if (array[j - 1] < array[j]) goto inner:(j++)
+        if n < 2 then return;
+        return call (u32 j = 1, u32 newN = 0) {
+    	    if j > n then repeat bubble:(n = newN);
+    	    if array[j - 1] < array[j] then repeat (j++);
 
             let temp = array[j - 1];
             set array[j - 1] = array[j];
             set array[j] = temp;
 
-            goto inner:(j++, newN = j)
+            repeat (j++, newN = j)
         }
     }
 }
@@ -217,11 +217,13 @@ proc sort(u32 size, i32[size] array) {
     where
 
     proc quickSort(u32 lo, u32 hi) {
-        if (lo < hi) {
+        if lo < hi then {
             let p = partition(lo - 1, hi + 1);
             quickSort(lo, p);
             quickSort(p + 1, hi);
-        }
+            return
+        };
+        return
     }
 
     proc partition(u32 lo, u32 hi) {
@@ -229,7 +231,8 @@ proc sort(u32 size, i32[size] array) {
         return call (lo, hi) {
             let i = for (lo; array[lo] < pivot; lo++) => lo;
             let j = for (hi; array[hi] > pivot; hi--) => hi;
-            if (i >= j) return j
+            
+            if i >= j then return j;
 
             let temp = array[j];
             set array[j] = array[i];
@@ -253,15 +256,15 @@ proc openFile(String path, append:) {
 }
 
 proc readUserNameFromFile(String filePath) {
-    match openFile(path = filePath)
-    case fileNotFound: => return err:(trace = createTrace(message = "File not found at : " + filePath))
-    case opened:(FileHandle handle) => {
+    openFile(path = filePath)
+    |> fileNotFound: => return err:(trace = createTrace(message = "File not found at : " + filePath))
+    |> opened:(FileHandle handle) => {
         let fileSize = size(handle);
         let name = createString(length = fileSize);
-        match read(handle, address = name.address, length = fileSize)
-        case err:(Trace trace) => return err:(trace)
-        case endOfFile:(Integer bytesRead) => return ok:(userName = resize(string = name, newLength = bytesRead))
-        case ok: => return ok:(userName = name)
+        read(handle, address = name.address, length = fileSize)
+        |> err:(Trace trace) => return err:(trace)
+        |> endOfFile:(Integer bytesRead) => return ok:(userName = resize(string = name, newLength = bytesRead))
+        |> ok: => return ok:(userName = name)
     }
 }`,
 
@@ -270,8 +273,8 @@ proc readUserNameFromFile(String filePath) {
 infix List list {
 
     func contains(Elem element) => call (index = list.size()) {
-        if (index == -1) goto false:
-        if (list.get(index) == element) goto true:
+        if index == -1 then goto false:;
+        if list.get(index) == element then goto true:;
         repeat (index--)
     }
 
@@ -292,28 +295,28 @@ type ArrayList = record {
 infix ArrayList list {
 
     func get(Integer index) {
-        if (index < 0 or index >= list.size) goto indexOutOfBounds:
+        if index < 0 or index >= list.size then goto indexOutOfBounds:;
         goto ok:(list.array.get(index))
     }
 
     proc set(Integer index, Elem newElement) {
-        if (index < 0 or index >= list.size) goto indexOutOfBounds:
+        if index < 0 or index >= list.size then goto indexOutOfBounds:;
         goto ok:(list.array.set(index, newElement))
     }
 
     proc add(Elem newElement) {
-        if (list.size < list.capacity) goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity))
+        if list.size < list.capacity then goto ok:(ArrayList(list.array.set(list.size, newElement), list.size + 1, list.capacity));
         let newCapacity = list.capacity * 2;
-        match alloc(newCapacity)
-        case ok:(Address address) {
+        alloc(newCapacity)
+        |> ok:(Address address) {
             let newArray = Array.copy(src = list.array, dest = Array(Elem, address), length = list.size);
             goto ok:(ArrayList(newArray.set(list.size, newElement), list.size + 1, newCapacity))
         }
-        case outOfMemory: => goto memoryfull:
+        |> outOfMemory: => goto memoryfull:
     }
 
     proc remove(Integer index) {
-        if (index < 0 or index >= list.size) goto indexOutOfBounds:
+        if index < 0 or index >= list.size then goto indexOutOfBounds:;
         let newArray = Array.move(list.array, fromIndex = index + 1, toIndex = index, length = list.size - index - 1);
         goto ok:(ArrayList(newArray, list.size - 1, list.capacity))
     }
