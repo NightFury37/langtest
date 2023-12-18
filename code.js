@@ -116,6 +116,29 @@ func fibonacci(Integer count) {
         if count < 1    return a
         repeat (count--, a = b, b += a)
     }
+}
+
+func sqrt(f64 num) {
+    let (f64 guess = 1) {
+        if isGoodEnough(guess, num)    return guess
+        repeat (guess = improveGuess(guess, num))
+    }
+
+    where
+
+    func isGoodEnough(f64 guess, f64 num) {
+        goto abs(square(guess) - num) < 0.00000001
+    }
+
+    func improveGuess(f64 guess, f64 num) {
+        return average(guess, num / guess)
+
+        where
+
+        func average(f64 x, f64 y) {
+            return (x + y) / 2
+        }
+    }
 }`,
 
 "Tutorial2.impl" : `module myserver.Tutorial2
@@ -214,6 +237,28 @@ proc sort2(u32 size, i32[size] array) {
            
             repeat (lo = i, hi = j)
         }
+    }
+}
+
+record Pattern {
+    u32 wordSize
+    char[wordSize] word
+    i32[wordSize] partialMatch
+}
+
+func stringMatch(u32 textSize, char[textSize] text, Pattern pattern) {
+    let kmp:(textIndex = 0, wordIndex = 0)
+    if textIndex >= textSize    goto notFound:
+    
+    let validTextIndex:(wordIndex) {
+        if wordIndex >= pattern.wordSize    goto found:(textIndex - wordIndex)
+        if pattern.word[wordIndex] == text[textIndex]    goto kmp:(textIndex++, wordIndex++)
+        
+        let newWordIndex = pattern.partialMatch[wordIndex]
+        
+        if newWordIndex == 10    return partialMatch[2]
+        if newWordIndex < 0    goto kmp:(textIndex++, wordIndex = newWordIndex + 1)
+        goto validTextIndex:(wordIndex = newWordIndex)
     }
 }`,
 
