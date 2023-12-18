@@ -74,99 +74,71 @@ type ModuleDefinition`,
 
 "readme.md" : `Hello doc`,
 
-"Tutorial1.impl" : `module myserver.Tutorial1;
+"Tutorial1.impl" : `module myserver.Tutorial1
 
-func square(Integer num) => num * num
-
+// Function definition
 func square(Integer num) {
     return num * num
 }
 
-func sumOfSquares(Integer first, Integer second) => square(num = first) + square(num = second)
-
+// Function call
 func sumOfSquares(Integer first, Integer second) {
     return square(num = first) + square(num = second)
 }
 
-func max(Integer a, Integer b) {
-    if a < b then return b;
-    return a
+// Variables
+func areaOfCircle(f64 radius) {
+    let pi = 3.1415926535897932384626
+    return pi * radius * radius
 }
 
-// Unlabeled block expression
-func factorial(Integer number) => call (number, result = 1) {
-    if number < 2 then return result;
-    repeat (number--, result *= number)
+// Conditional
+func min(Integer a, Integer b) {
+    if a < b    return a
+    return b
 }
 
-// Unlabeled block statement
+func abs(Integer num) {
+    if num < 0    return -num
+    return num
+}
+
+// Loop
 func factorial(Integer number) {
-    return call (number, result = 1) {
-        if number < 2 then return result;
+    let (number, result = 1) {
+        if number < 2    return result
         repeat (number--, result *= number)
     }
 }
 
-// Labeled block expression
-func factorial(Integer number) => call iter:(number, result = 1) {
-    if number < 2 then return result;
-    repeat iter:(number--, result *= number)
-}
-
-// Labeled block statement
-func factorial(Integer number) {
-    return call iter:(number, result = 1) {
-        if number < 2 then return result;
-        repeat iter:(number--, result *= number)
-    }
-}
-
-// Unlabeled block expression
-func fibonacci(Integer count) => call (count, a = 0, b = 1) {
-    if count < 1 then return a;
-    repeat (count--, a = b, b += a)
-}
-
-// Unlabeled block statement
 func fibonacci(Integer count) {
-    return call (count, a = 0, b = 1) {
-        if count < 1 then return a;
+    let (count, a = 0, b = 1) {
+        if count < 1    return a
         repeat (count--, a = b, b += a)
-    }
-}
-
-// Labeled block expression
-func fibonacci(Integer count) => call iter:(count, a = 0, b = 1) {
-    if count < 1 then return a;
-    repeat iter:(count--, a = b, b += a)
-}
-
-// Labeled block statement
-func fibonacci(Integer count) {
-    return call iter:(count, a = 0, b = 1) {
-        if count < 1 then return a;
-        repeat iter:(count--, a = b, b += a)
     }
 }`,
 
-"Tutorial2.impl" : `module myserver.Tutorial2;
+"Tutorial2.impl" : `module myserver.Tutorial2
 
 import libraryname.packagename1.packagename2.ModuleName1 {
-    use functionName1 as name1;
-    use functionName2 as name2;
-    use procedureName3 as name3;
-    use TypeName4 as Name4;
-};
-import libraryname.packagename3.ModuleName2;
-import externallibraryname1.packagename4.ModuleName3;
+    use functionName1 as name1
+    use functionName2 as name2
+    use procedureName3 as name3
+    use TypeName4 as Name4
+}
+import libraryname.packagename3.ModuleName2
+import externallibraryname1.packagename4.ModuleName3
 
 func compose<type A, type B, type C>(func f(A a) -> B, func g(B b) -> C) {
-    return x => g(f(x))
+    return (A x)    return g(f(x))
 }
 
 proc composeTest(String input) {
-    let hFun = compose(f = foo, g = bar);
-    let message = if hFun(input) then "Less than 5 characters" else "More than 4 characters";
+    let hFun = compose(f = foo, g = bar)
+    let message = call {
+        if hFun(input)    return "Less than 5 characters"
+        return "More than 4 characters"
+    }
     return toUpperCase(message)
 
     where
@@ -188,55 +160,57 @@ func areaOfCircle(Float radius) {
     val pi = 3.1415926535897932384626
 
     infix Float num {
-        func raisedTo(Integer power) => call (power, result = 1) {
-            if power == 0 then return result;
-            repeat (power--, soFar *= num)
+        func raisedTo(Integer power) {
+            let (power, Float result = 1) {
+                if power == 0    return result
+                repeat (power--, result *= num)
+            }
         }
     }
 }
 
-proc sort(u32 size, i32[size] array) {
-    return call bubble:(n = size) {
-        if n < 2 then return;
-        return call (u32 j = 1, u32 newN = 0) {
-    	    if j > n then repeat bubble:(n = newN);
-    	    if array[j - 1] < array[j] then repeat (j++);
+proc sort1(u32 size, i32[size] array) {
+    let bubble:(n = size) {
+        if n < 2    return void
+        let inner:(u32 j = 1, u32 newN = 0) {
+    	    if j > n    repeat bubble:(n = newN)
+    	    if array[j - 1] < array[j]    repeat inner:(j++)
 
-            let temp = array[j - 1];
-            set array[j - 1] = array[j];
-            set array[j] = temp;
+            let temp = array[j - 1]
+            set array[j - 1] = array[j]
+            set array[j] = temp
 
-            repeat (j++, newN = j)
+            repeat inner:(j++, newN = j)
         }
     }
 }
 
-proc sort(u32 size, i32[size] array) {
-    quickSort(0, size - 1)
+proc sort2(u32 size, i32[size] array) {
+    do quickSort(0, size - 1)
 
     where
 
     proc quickSort(u32 lo, u32 hi) {
         if lo < hi then {
-            let p = partition(lo - 1, hi + 1);
-            quickSort(lo, p);
-            quickSort(p + 1, hi);
-            return
-        };
-        return
+            let p = partition(lo - 1, hi + 1)
+            do quickSort(lo, p)
+            do quickSort(p + 1, hi)
+            return void
+        }
+        return void
     }
 
     proc partition(u32 lo, u32 hi) {
-        let pivot = array[lo + (hi - lo) / 2];
-        return call (lo, hi) {
-            let i = for (lo; array[lo] < pivot; lo++) => lo;
-            let j = for (hi; array[hi] > pivot; hi--) => hi;
+        let pivot = array[lo + (hi - lo) / 2]
+        let (lo, hi) {
+            let i = for (lo; array[lo] < pivot; lo++) => lo
+            let j = for (hi; array[hi] > pivot; hi--) => hi
             
-            if i >= j then return j;
+            if i >= j    return j
 
-            let temp = array[j];
-            set array[j] = array[i];
-            set array[i] = temp;
+            let temp = array[j]
+            set array[j] = array[i]
+            set array[i] = temp
            
             repeat (lo = i, hi = j)
         }
@@ -256,15 +230,15 @@ proc openFile(String path, append:) {
 }
 
 proc readUserNameFromFile(String filePath) {
-    openFile(path = filePath)
-    |> fileNotFound: => return err:(trace = createTrace(message = "File not found at : " + filePath))
-    |> opened:(FileHandle handle) => {
+    if openFile(path = filePath)
+    == fileNotFound:    return err:(trace = createTrace(message = "File not found at : " + filePath))
+    == opened:(FileHandle handle) {
         let fileSize = size(handle);
         let name = createString(length = fileSize);
-        read(handle, address = name.address, length = fileSize)
-        |> err:(Trace trace) => return err:(trace)
-        |> endOfFile:(Integer bytesRead) => return ok:(userName = resize(string = name, newLength = bytesRead))
-        |> ok: => return ok:(userName = name)
+        if read(handle, address = name.address, length = fileSize)
+        == err:(Trace trace)                return err:(trace)
+        == endOfFile:(Integer bytesRead)    return ok:(userName = resize(string = name, newLength = bytesRead))
+        == ok:                              return ok:(userName = name)
     }
 }`,
 
